@@ -24,405 +24,390 @@
             padding: 0;
             background-color: var(--bg-color);
             color: var(--text-color);
-            overflow-x: hidden; /* Evita el scroll horizontal */
+            overflow-x: hidden;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+        header { background-color: var(--primary-color); min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; position: relative; }
+        header h1 { font-family: var(--font-title); font-size: 5rem; margin: 0; text-shadow: 2px 2px 5px rgba(0,0,0,0.3); animation: fadeInDown 1.5s; }
+        header p { font-size: 1.5rem; animation: fadeInUp 1.5s 0.5s; }
+        .scroll-down { position: absolute; bottom: 30px; font-size: 1rem; animation: bounce 2s infinite; }
+        section { padding: 100px 0; border-bottom: 2px dashed var(--accent-color); text-align: center;}
+        section h2 { font-family: var(--font-title); font-size: 3.5rem; color: var(--secondary-color); margin-bottom: 50px; }
+        .content-box { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); line-height: 1.8; font-size: 1.1rem; text-align: left;}
+        strong { color: var(--primary-color); }
+        .video-container { position: relative; width: 100%; padding-bottom: 56.25%; height: 0; margin-top: 20px;}
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 15px; }
 
-        /* --- Encabezado --- */
-        header {
-            background-color: var(--primary-color);
-            min-height: 100vh; /* Ocupa toda la pantalla inicial */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: white;
-            position: relative;
-        }
+        /* Efecto Máquina de Escribir */
+        #carta .content-box { text-align: left; }
+        .typed-paragraph { opacity: 0; animation: fadeIn 1s forwards; animation-delay: var(--delay); }
+        .typed-char { opacity: 0; animation: fadeIn 0.1s forwards; animation-delay: var(--delay); }
 
-        header h1 {
-            font-family: var(--font-title);
-            font-size: 5rem;
-            margin: 0;
-            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-            animation: fadeInDown 1.5s;
-        }
-
-        header p {
-            font-size: 1.5rem;
-            animation: fadeInUp 1.5s 0.5s;
-        }
-
-        .scroll-down {
-            position: absolute;
-            bottom: 30px;
-            font-size: 1rem;
-            animation: bounce 2s infinite;
-        }
-
-        /* --- Secciones y Contenido --- */
-        section {
-            padding: 100px 0;
-            border-bottom: 2px dashed var(--accent-color);
-        }
-
-        section h2 {
-            font-family: var(--font-title);
-            font-size: 3.5rem;
-            text-align: center;
-            color: var(--secondary-color);
-            margin-bottom: 50px;
-        }
-
-        .content-box {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            line-height: 1.8;
-            font-size: 1.1rem;
-        }
-        
-        strong {
-            color: var(--primary-color);
-        }
-
-        /* --- Jardín de Flores Animadas --- */
-        #flores {
-            background: #fde4ea;
+        /* Sección Cielo Estrellado de Promesas */
+        #promesas {
+            background-color: #000020;
             position: relative;
             overflow: hidden;
-            min-height: 400px;
         }
-
-        .flower-container {
+        #promesas h2, #promesas .promise-item { color: white; }
+        #stars-canvas {
             position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 50px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
         }
+        .promises-list { list-style: none; padding: 0; position: relative; z-index: 1; text-align: center; }
+        .promise-item { font-family: var(--font-title); font-size: 2rem; margin-bottom: 30px; opacity: 0; transform: translateY(50px); transition: all 1s ease; }
+        .promise-item.visible { opacity: 1; transform: translateY(0); }
 
-        .flower {
-            width: 100px;
-            height: 100px;
-            position: relative;
-        }
+        /* Quiz Interactivo */
+        #quiz-container { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        #quiz-question { font-size: 1.4rem; font-weight: bold; margin-bottom: 20px; color: var(--secondary-color); }
+        .quiz-options { display: grid; grid-template-columns: 1fr; gap: 10px; }
+        .quiz-option { background-color: var(--accent-color); color: var(--secondary-color); padding: 15px; border-radius: 10px; border: 2px solid transparent; cursor: pointer; transition: all 0.3s ease; text-align: center; }
+        .quiz-option:hover { background-color: var(--primary-color); color: white; }
+        .quiz-option.selected { border-color: var(--secondary-color); }
+        .quiz-option.correct { background-color: #a7d7c5; color: white; }
+        .quiz-option.incorrect { background-color: #ff6961; color: white; }
+        #quiz-feedback { margin-top: 20px; font-weight: bold; }
+        #quiz-result { text-align: center; font-size: 1.5rem; font-family: var(--font-title); color: var(--primary-color); }
 
-        .petal {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            background: var(--accent-color);
-            border-radius: 50%;
-            bottom: 40px;
-            left: 25px;
-            transform-origin: bottom center;
-            opacity: 0;
-        }
+        /* Juego Final del Perdón */
+        #juego .content-box {text-align:center;}
+        #question { font-size: 1.5rem; font-weight: bold; color: var(--secondary-color); }
+        .buttons-container { margin-top: 30px; display: flex; justify-content: center; align-items: center; gap: 20px; min-height: 80px;}
+        .btn { padding: 15px 30px; border: none; border-radius: 50px; font-size: 1.2rem; cursor: pointer; transition: all 0.3s ease; color: white; font-weight: bold; }
+        #yesBtn { background-color: #4CAF50; }
+        #noBtn { background-color: #f44336; position: relative; }
+        #system-error, #gracias-mensaje { display: none; margin-top: 30px; }
+        #system-error { padding: 20px; background-color: #2c2c2c; color: #00ff00; font-family: 'Courier New', monospace; border: 2px solid #00ff00; text-align:left;}
+        #gracias-mensaje { font-size: 2rem; font-family: var(--font-title); color: var(--primary-color); }
 
-        .stem {
-            position: absolute;
-            bottom: 0;
-            left: 48px;
-            width: 4px;
-            height: 50px;
-            background: #77dd77;
-        }
-        
-        .flower.visible .stem { animation: grow-stem 2s forwards; }
-        .flower.visible .petal { animation: bloom 2s 1s forwards; }
-
-        .petal:nth-child(1) { transform: rotate(0deg); background: #ffadad; }
-        .petal:nth-child(2) { transform: rotate(72deg); background: #ffd6a5; }
-        .petal:nth-child(3) { transform: rotate(144deg); background: #fdffb6; }
-        .petal:nth-child(4) { transform: rotate(216deg); background: #caffbf; }
-        .petal:nth-child(5) { transform: rotate(288deg); background: #a0c4ff; }
-
-
-        /* --- Sección de la Graduación --- */
-        #graduacion {
-            background-color: #e0f7fa;
-        }
-        #graduacion .icon {
-            font-size: 4rem;
-            color: var(--primary-color);
-        }
-
-        /* --- El Juego del Perdón --- */
-        #juego {
-            text-align: center;
-        }
-        
-        #question {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--secondary-color);
-        }
-        
-        .buttons-container {
-            margin-top: 30px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .btn {
-            padding: 15px 30px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: white;
-            font-weight: bold;
-        }
-
-        #yesBtn {
-            background-color: #4CAF50; /* Verde */
-            box-shadow: 0 5px #388E3C;
-        }
-        #yesBtn:active {
-            box-shadow: 0 2px #388E3C;
-            transform: translateY(3px);
-        }
-
-        #noBtn {
-            background-color: #f44336; /* Rojo */
-            position: relative; /* Clave para el movimiento */
-            box-shadow: 0 5px #d32f2f;
-        }
-        
-        #system-error {
-            display: none;
-            margin-top: 30px;
-            padding: 20px;
-            background-color: #2c2c2c;
-            color: #00ff00; /* Texto verde como terminal */
-            font-family: 'Courier New', Courier, monospace;
-            border: 2px solid #00ff00;
-            border-radius: 10px;
-            white-space: pre-wrap; /* Para que respete los saltos de línea */
-            text-align: left;
-        }
-        
-        #gracias-mensaje {
-            display: none;
-            font-size: 2rem;
-            font-family: var(--font-title);
-            color: var(--primary-color);
-        }
-
-        /* --- Animaciones --- */
-        .reveal {
-            opacity: 0;
-            filter: blur(5px);
-            transform: translateY(100px);
-            transition: all 1.2s ease-in-out;
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            filter: blur(0);
-            transform: translateY(0);
-        }
-        
+        /* Animaciones */
+        .reveal { opacity: 0; transform: translateY(100px); transition: all 1.2s ease-in-out; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-50px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-15px); } 60% { transform: translateY(-10px); } }
-        @keyframes grow-stem { from { height: 0; } to { height: 50px; } }
-        @keyframes bloom { from { opacity: 0; transform: scale(0); } to { opacity: 1; transform: scale(1) rotate(var(--rotate)); } }
-        .petal:nth-child(1) { --rotate: 0deg; }
-        .petal:nth-child(2) { --rotate: 72deg; }
-        .petal:nth-child(3) { --rotate: 144deg; }
-        .petal:nth-child(4) { --rotate: 216deg; }
-        .petal:nth-child(5) { --rotate: 288deg; }
-    
-        /* --- Responsive Design --- */
+        @keyframes fadeIn { to { opacity: 1; } }
+
+        /* Responsive */
         @media screen and (max-width: 768px) {
             header h1 { font-size: 3rem; }
-            header p { font-size: 1.2rem; }
             section h2 { font-size: 2.5rem; }
-            .content-box { padding: 25px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Encabezado de pantalla completa -->
     <header>
         <h1>Mi Pochi Bimune...</h1>
-        <p>Esta página es para ti. Un reflejo de todo lo que no supe decir.</p>
-        <div class="scroll-down">Desliza para continuar...</div>
+        <p>Un intento desesperado por reconstruir nuestro universo.</p>
+        <div class="scroll-down">Desliza, por favor...</div>
     </header>
 
-    <!-- Sección 1: La carta de perdón -->
-    <section id="carta">
-        <div class="container">
-            <h2 class="reveal">Mi corazón en palabras</h2>
-            <div class="content-box reveal">
-                <p>Pochi de mi vida,</p>
-                <p>Si estás leyendo esto, es porque me diste una pequeña oportunidad, y eso ya significa el mundo para mí. Sé que te he fallado. Sé que te lastimé, y tomar la decisión de terminar fue la estupidez más grande que he cometido. Cada día sin ti es un recordatorio constante de mi error, un vacío que nada puede llenar.</p>
-                <p><strong>Hoy lloré mucho.</strong> Lloré pensando en nosotros, en tus risas que son mi melodía favorita, en la seguridad de tus abrazos. Lloré de arrepentimiento y de miedo. Miedo de haberte perdido para siempre. Me siento completamente perdido sin mi norte, sin mi guía... sin ti.</p>
-                <p>No busco excusas, porque no las hay. Fui un tonto y te pido, desde el fondo de mi alma rota, que me perdones. <strong>Te amo tanto, Pochi.</strong> Más de lo que las palabras pueden expresar. Eres mi primer pensamiento al despertar y el último antes de dormir. Eres el "ojalá estuvieras aquí" en cada momento bonito que vivo.</p>
-                <p>Quiero ser mejor, para ti, por ti. Quiero demostrarte que puedo ser el hombre que mereces. Déjame intentarlo de nuevo, por favor.</p>
-                <p>Con todo el amor de mi arrepentido corazón,</p>
-                <p>Edward</p>
+    <section id="inicio">
+        <div class="container reveal">
+            <h2>Reproduce esto mientras lees...</h2>
+            <p style="font-size: 1.2rem;">Por favor, Pochi, dale play. Esta canción sonaba en mi cabeza mientras te escribía cada palabra...</p>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/VYa72m8jouc" title="Sufjan Stevens - Fourth of July" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
         </div>
     </section>
-    
-    <!-- Sección 2: Flores para ti -->
-    <section id="flores">
+
+    <section id="carta">
         <div class="container">
-             <h2 class="reveal">Unas flores para mi flor</h2>
-             <div class="flower-container">
-                 <div class="flower reveal"><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="stem"></div></div>
-                 <div class="flower reveal"><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="stem"></div></div>
-                 <div class="flower reveal"><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="stem"></div></div>
-             </div>
+            <h2 class="reveal">Mi corazón en palabras</h2>
+            <div id="carta-texto" class="content-box reveal">
+                </div>
         </div>
     </section>
 
-    <!-- Sección 3: Tu Graduación -->
     <section id="graduacion">
         <div class="container" style="text-align: center;">
             <h2 class="reveal">Un sueño que no quiero perder</h2>
             <div class="content-box reveal">
-                <div class="icon">🎓</div>
+                <div style="font-size: 4rem;">🎓</div>
                 <p>Hay un evento que se acerca, uno de los días más importantes de tu vida: <strong>tu graduación</strong>. He soñado con ese momento. Soñé con verte cruzar ese escenario, con tu toga y birrete, con esa sonrisa de orgullo y éxito que ilumina todo a tu alrededor.</p>
-                <p>No me quiero perder eso. No me imagino no estar ahí, aplaudiendo más fuerte que nadie, con el corazón a punto de explotar de orgullo por ti. Sería un honor y un privilegio ser testigo de tu increíble logro. Por favor, déjame compartir ese día contigo, aunque sea desde lejos. Eres mi campeona.</p>
+                <p>No me quiero perder eso. No me imagino no estar ahí, aplaudiendo más fuerte que nadie. Por favor, déjame compartir ese día contigo. Eres mi campeona.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="promesas">
+        <canvas id="stars-canvas"></canvas>
+        <div class="container">
+            <h2 class="reveal">Mis Promesas Bajo las Estrellas</h2>
+            <ul class="promises-list">
+                <li class="promise-item">Prometo escucharte siempre, incluso cuando no tenga las palabras correctas.</li>
+                <li class="promise-item">Prometo ser tu mayor fan en cada uno de tus logros, como tu graduación.</li>
+                <li class="promise-item">Prometo nunca más tomar una decisión tan estúpida que nos aleje.</li>
+                <li class="promise-item">Prometo trabajar cada día para ser el hombre que mereces.</li>
+                <li class="promise-item">Prometo recordarte lo increíble que eres, especialmente en los días que lo olvides.</li>
+            </ul>
+        </div>
+    </section>
+    
+    <section id="quiz">
+        <div class="container">
+            <h2 class="reveal">¿Cuánto nos conocemos?</h2>
+            <div id="quiz-container" class="reveal">
+                <div id="quiz-question"></div>
+                <div class="quiz-options"></div>
+                <div id="quiz-feedback"></div>
+                <button id="next-question-btn" class="btn" style="background-color: var(--primary-color); margin-top: 20px; display: none;">Siguiente</button>
+                <div id="quiz-result"></div>
             </div>
         </div>
     </section>
     
-     <!-- Sección 4: Cosas que extraño -->
-    <section id="extrano">
-        <div class="container">
-            <h2 class="reveal">Pequeñas cosas que extraño más que nada...</h2>
-            <ul class="content-box reveal">
-                <li>La forma en que te acurrucas buscando calor por la noche.</li>
-                <li>Tus mensajes de "buenos días" que arreglaban cualquier inicio de jornada.</li>
-                <li>Nuestras conversaciones tontas hasta las 3 de la madrugada.</li>
-                <li>El olor de tu pelo cuando te abrazaba por detrás.</li>
-                <li>Cómo me explicabas con pasión las cosas que te gustan, aunque yo no entendiera nada.</li>
-                <li>Ver películas sabiendo que te quedarías dormida a la mitad.</li>
-                <li>Tu increíble habilidad para encontrar el mejor lugar para comer en cualquier sitio.</li>
-                <li>Simplemente, el silencio cómodo de estar en la misma habitación, sabiendo que estabas ahí.</li>
-            </ul>
+    <section id="nuestra-cancion">
+         <div class="container reveal">
+            <h2>Y para el Futuro... Nuestra Canción</h2>
+            <p style="font-size: 1.2rem;">Escúchala... imagina todo lo que podemos construir. Esto es lo que quiero para nosotros.</p>
+            <div class="video-container">
+                 <iframe src="https://www.youtube.com/embed/N8Nzb-oc8XA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
         </div>
     </section>
-
-    <!-- Sección 5: El Juego del Perdón -->
+    
     <section id="juego">
         <div class="container reveal">
-            <h2>El momento de la verdad...</h2>
+            <h2>La pregunta más importante...</h2>
             <div class="content-box">
-                <p id="question">Después de todo esto, con el corazón en la mano, te pregunto...<br>Pochi Bimune, ¿me perdonas?</p>
-                
-                <div id="gracias-mensaje">
-                    ¡Gracias! Te prometo que no te arrepentirás. ❤️
-                </div>
-
+                <p id="question">Pochi Bimune, ¿me das la oportunidad de arreglar mi error más grande?</p>
+                <div id="gracias-mensaje">¡Gracias! Prometo no fallarte. Jamás. ❤️</div>
                 <div class="buttons-container">
-                    <button class="btn" id="yesBtn">Sí</button>
+                    <button class="btn" id="yesBtn">Sí, hablemos</button>
                     <button class="btn" id="noBtn">No</button>
                 </div>
-
                 <div id="system-error">
-                    <p>&gt; System.Error: 0xDEADBEEF</p>
-                    <p>&gt; Descripción: Solicitud rechazada por el corazón del sistema.</p>
-                    <p>&gt; <strong>Ejecutando protocolo de emergencia: "Operación Pochi"...</strong></p>
-                    <p>&gt; Soy la página web que Edward construyó. Oye, Pochi, escúchame a mí. Vi todo el esfuerzo, el arrepentimiento y el amor que puso en cada línea de código. <strong>¡Perdónalo, porfa!</strong></p>
-                    <p>&gt; Él de verdad te ama y te extraña un montón.</p>
-                    <p>&gt; Fin de la transmisión.</p>
+                    <p>&gt; System.Error: 0xHEARTBREAK</p>
+                    <p>&gt; Descripción: Solicitud rechazada. Corazón del sistema no permite esta opción.</p>
+                    <p>&gt; Soy esta página web. Edward puso todo su corazón aquí. Vi lo arrepentido que está. Dale una oportunidad, por favor. Lo quiere intentar de verdad.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Pie de página -->
-    <footer>
-        <div class="container" style="text-align:center; padding: 40px 0;">
-            <p>Hecho con un teclado lleno de lágrimas y un corazón lleno de esperanza. <br>Para siempre tuyo, Edward.</p>
-        </div>
+    <footer style="padding: 40px 0; text-align:center;">
+        <p>Hecho con un teclado lleno de lágrimas y un alma llena de esperanza.<br>Siempre tuyo, Edward.</p>
     </footer>
 
-
     <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
         // --- Lógica para animaciones al hacer scroll ---
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
+            entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
+                    // Iniciar efectos específicos cuando se ven por primera vez
+                    if (entry.target.id === 'carta-texto' && !entry.target.dataset.typed) {
+                        typewriterEffect();
+                        entry.target.dataset.typed = 'true';
+                    }
+                     if (entry.target.classList.contains('promise-item')) {
+                        entry.target.classList.add('visible');
+                    }
                 }
             });
-        }, {
-            threshold: 0.1 // Se activa cuando el 10% del elemento es visible
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll('.reveal, .promise-item').forEach(el => observer.observe(el));
+
+        // --- Lógica del efecto de Máquina de Escribir ---
+        function typewriterEffect() {
+            const letterContent = [
+                "Mi queridísima Pochi,",
+                "Si estás leyendo esto, gracias. Sé que te he fallado. Sé que te lastimé, y tomar la decisión de terminar fue la estupidez más grande de mi vida. Cada día sin ti es un recordatorio constante de mi error.",
+                "Hoy lloré mucho. Lloré pensando en nosotros, en tus risas. Lloré de arrepentimiento y de miedo. Miedo de haberte perdido para siempre. Me siento completamente perdido sin mi norte, sin mi guía... sin ti.",
+                "No busco excusas, porque no las hay. Te pido, desde el fondo de mi alma rota, que me perdones. Te amo tanto, Pochi. Más de lo que las palabras pueden expresar. Eres mi primer pensamiento al despertar y el último antes de dormir.",
+                "Con todo el amor de mi arrepentido corazón,",
+                "Edward"
+            ];
+            const letterBox = document.getElementById('carta-texto');
+            letterBox.innerHTML = ''; 
+
+            let totalCharDelay = 0;
+            const charInterval = 30; // ms entre caracteres
+
+            letterContent.forEach((paragraphText, pIndex) => {
+                const p = document.createElement('p');
+                letterBox.appendChild(p);
+                for (let i = 0; i < paragraphText.length; i++) {
+                    const charSpan = document.createElement('span');
+                    charSpan.textContent = paragraphText[i];
+                    charSpan.classList.add('typed-char');
+                    charSpan.style.setProperty('--delay', `${totalCharDelay * charInterval}ms`);
+                    p.appendChild(charSpan);
+                    totalCharDelay++;
+                }
+                 totalCharDelay += 15; // Pausa entre párrafos
+            });
+        }
+        
+        // --- Lógica del Cielo Estrellado ---
+        const canvas = document.getElementById('stars-canvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = canvas.parentElement.offsetHeight;
+            let stars = [];
+
+            function createStars() {
+                stars = [];
+                for (let i = 0; i < 150; i++) {
+                    stars.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        radius: Math.random() * 1.5,
+                        alpha: Math.random(),
+                        dAlpha: Math.random() * 0.02 - 0.01
+                    });
+                }
+            }
+
+            function animateStars() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                stars.forEach(star => {
+                    star.alpha += star.dAlpha;
+                    if (star.alpha <= 0 || star.alpha >= 1) {
+                        star.dAlpha *= -1;
+                    }
+                    ctx.beginPath();
+                    ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+                    ctx.fill();
+                });
+                requestAnimationFrame(animateStars);
+            }
+            createStars();
+            animateStars();
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = canvas.parentElement.offsetHeight;
+                createStars();
+            });
+             // Asegurarnos que la altura del canvas se ajuste al contenido
+            const promisesSection = document.getElementById('promesas');
+            new ResizeObserver(() => {
+                canvas.height = promisesSection.offsetHeight;
+                createStars();
+            }).observe(promisesSection);
+        }
+
+        // --- Lógica del Quiz ---
+        const quizData = [
+            // PERSONALIZA ESTAS PREGUNTAS Y RESPUESTAS
+            { question: "¿Cuál fue el lugar de nuestra primera cita 'oficial'?", options: ["El cine", "Un parque", "Esa cafetería especial", "Tu casa"], answer: 2 },
+            { question: "¿Qué apodo cariñoso uso más contigo?", options: ["Mi amor", "Pochi Bimune", "Cielo", "Bebé"], answer: 1 },
+            { question: "¿Cuál es mi comida favorita que tú preparas (o intentas preparar)?", options: ["Pasta", "Tacos", "Hamburguesas", "Arepas"], answer: 0 },
+            { question: "¿De qué color eran mis ojos cuando te dije 'te amo' por primera vez?", options: ["Color normal", "Llenos de lágrimas de felicidad", "Cerrados por los nervios", "Color amor"], answer: 1 }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        const questionEl = document.getElementById('quiz-question');
+        const optionsEl = document.querySelector('.quiz-options');
+        const feedbackEl = document.getElementById('quiz-feedback');
+        const nextBtn = document.getElementById('next-question-btn');
+        const resultEl = document.getElementById('quiz-result');
+        
+        function loadQuiz() {
+            feedbackEl.textContent = '';
+            nextBtn.style.display = 'none';
+            const currentQuestion = quizData[currentQuestionIndex];
+            questionEl.innerText = currentQuestion.question;
+            optionsEl.innerHTML = '';
+            currentQuestion.options.forEach((option, index) => {
+                const button = document.createElement('div');
+                button.innerText = option;
+                button.classList.add('quiz-option');
+                button.dataset.index = index;
+                button.addEventListener('click', selectAnswer);
+                optionsEl.appendChild(button);
+            });
+        }
+
+        function selectAnswer(e) {
+            const selectedButton = e.target;
+            const selectedIndex = parseInt(selectedButton.dataset.index);
+            const correctIndex = quizData[currentQuestionIndex].answer;
+            
+            document.querySelectorAll('.quiz-option').forEach(btn => {
+                btn.removeEventListener('click', selectAnswer); // Desactivar opciones
+            });
+
+            if (selectedIndex === correctIndex) {
+                score++;
+                selectedButton.classList.add('correct');
+                feedbackEl.textContent = "¡Correcto! Como si hubiera sido ayer...";
+                feedbackEl.style.color = 'green';
+            } else {
+                selectedButton.classList.add('incorrect');
+                 feedbackEl.textContent = "Quizás me equivoqué... pero lo importante es el recuerdo.";
+                feedbackEl.style.color = 'red';
+            }
+            nextBtn.style.display = 'block';
+        }
+
+        nextBtn.addEventListener('click', () => {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizData.length) {
+                loadQuiz();
+            } else {
+                showResults();
+            }
         });
 
-        const elementsToReveal = document.querySelectorAll('.reveal');
-        elementsToReveal.forEach((el) => observer.observe(el));
+        function showResults() {
+            questionEl.style.display = 'none';
+            optionsEl.style.display = 'none';
+            nextBtn.style.display = 'none';
+            feedbackEl.style.display = 'none';
+            resultEl.innerHTML = `No importa la puntuación. Cada segundo a tu lado es un recuerdo que atesoro. Gracias por jugar conmigo.`;
+        }
+        
+        loadQuiz();
 
-        // --- Lógica del juego ---
+
+        // --- Lógica del Juego del Perdón ---
         const noBtn = document.getElementById('noBtn');
         const yesBtn = document.getElementById('yesBtn');
-        const question = document.getElementById('question');
-        const systemError = document.getElementById('system-error');
-        const graciasMensaje = document.getElementById('gracias-mensaje');
-
-        const container = document.querySelector('#juego .content-box');
-
         noBtn.addEventListener('mouseover', () => {
-            // Obtener dimensiones del contenedor
+            const container = noBtn.parentElement;
             const containerRect = container.getBoundingClientRect();
             const btnRect = noBtn.getBoundingClientRect();
-
-            let newTop, newLeft;
-
-            // Bucle para asegurarse de que la nueva posición esté dentro de los límites
-            do {
-                newTop = Math.random() * (containerRect.height - btnRect.height);
-                newLeft = Math.random() * (containerRect.width - btnRect.width);
-            } while (isOverlapping(newTop, newLeft, yesBtn.getBoundingClientRect(), containerRect)); // Evitar que se ponga sobre el SI
-
+            const newTop = Math.random() * (containerRect.height - btnRect.height);
+            const newLeft = Math.random() * (containerRect.width - btnRect.width);
+            
             noBtn.style.position = 'absolute';
             noBtn.style.top = `${newTop}px`;
             noBtn.style.left = `${newLeft}px`;
         });
         
-        function isOverlapping(top, left, otherElRect, containerRect) {
-            const noBtnWidth = noBtn.getBoundingClientRect().width;
-            const noBtnHeight = noBtn.getBoundingClientRect().height;
-            // Coordenadas relativas al contenedor
-            const otherTop = otherElRect.top - containerRect.top;
-            const otherLeft = otherElRect.left - containerRect.left;
-
-            return !(left + noBtnWidth < otherLeft ||
-                     left > otherLeft + otherElRect.width ||
-                     top + noBtnHeight < otherTop ||
-                     top > otherTop + otherElRect.height);
-        }
-
-        noBtn.addEventListener('click', () => {
-             systemError.style.display = 'block';
-        });
+         noBtn.addEventListener('click', () => {
+             document.getElementById('system-error').style.display = 'block';
+         });
 
         yesBtn.addEventListener('click', () => {
-            question.style.display = 'none';
-            noBtn.style.display = 'none';
-            yesBtn.style.display = 'none';
-            systemError.style.display = 'none';
-            graciasMensaje.style.display = 'block';
+            document.getElementById('question').style.display = 'none';
+            document.querySelector('.buttons-container').style.display = 'none';
+            document.getElementById('system-error').style.display = 'none';
+            document.getElementById('gracias-mensaje').style.display = 'block';
+            
+            // Opcional: abrir WhatsApp
+             setTimeout(() => {
+                 window.location.href = "https://wa.me/TUNUMERO?text=Hablemos,%20Edward..."; 
+                 // REEMPLAZA TUNUMERO por tu número con código de país, ej: 573001234567
+             }, 2000);
         });
+    });
     </script>
 </body>
 </html>
