@@ -2,412 +2,548 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para ti, mi Pochi Bimune</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ENIGMA | Luxury Experience</title>
+    
+    <!-- FUENTES PREMIUM -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Montserrat:wght@200;300;400;600&display=swap" rel="stylesheet">
+    
     <style>
-        /* Estilos Generales y Paleta de Colores */
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400&display=swap');
-
+        /* ================= VARIABLES ================= */
         :root {
-            --bg-color: #fff0f5; /* Lavender Blush */
-            --primary-color: #ff85a2; /* Rosa un poco más fuerte */
-            --secondary-color: #6a0572; /* Morado profundo para el texto */
-            --accent-color: #ffb3c6; /* Rosa claro */
-            --text-color: #4a4a4a;
-            --font-title: 'Dancing Script', cursive;
-            --font-body: 'Poppins', sans-serif;
+            --gold: #D4AF37;
+            --gold-gradient: linear-gradient(135deg, #8a6e2f 0%, #ffe97d 50%, #8a6e2f 100%);
+            --black: #020202;
+            --dark-card: rgba(15, 15, 15, 0.75);
+            --font-head: 'Cinzel', serif;
+            --font-body: 'Montserrat', sans-serif;
+            --ease: cubic-bezier(0.23, 1, 0.32, 1);
         }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
+        
         body {
+            background-color: var(--black);
+            color: #fff;
             font-family: var(--font-body);
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-color);
             overflow-x: hidden;
+            min-height: 100vh;
         }
 
-        .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
-        header { background-color: var(--primary-color); min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; position: relative; }
-        header h1 { font-family: var(--font-title); font-size: 5rem; margin: 0; text-shadow: 2px 2px 5px rgba(0,0,0,0.3); animation: fadeInDown 1.5s; }
-        header p { font-size: 1.5rem; animation: fadeInUp 1.5s 0.5s; }
-        .scroll-down { position: absolute; bottom: 30px; font-size: 1rem; animation: bounce 2s infinite; }
-        section { padding: 100px 0; border-bottom: 2px dashed var(--accent-color); text-align: center;}
-        section h2 { font-family: var(--font-title); font-size: 3.5rem; color: var(--secondary-color); margin-bottom: 50px; }
-        .content-box { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); line-height: 1.8; font-size: 1.1rem; text-align: left;}
-        strong { color: var(--primary-color); }
-        .video-container { position: relative; width: 100%; padding-bottom: 56.25%; height: 0; margin-top: 20px;}
-        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 15px; }
-
-        /* Efecto Máquina de Escribir */
-        #carta .content-box { text-align: left; }
-        .typed-paragraph { opacity: 0; animation: fadeIn 1s forwards; animation-delay: var(--delay); }
-        .typed-char { opacity: 0; animation: fadeIn 0.1s forwards; animation-delay: var(--delay); }
-
-        /* Sección Cielo Estrellado de Promesas */
-        #promesas {
-            background-color: #000020;
-            position: relative;
-            overflow: hidden;
+        /* FONDO PARTICULAS */
+        .background-world {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background: radial-gradient(circle at 50% 50%, #151515 0%, #000 90%);
         }
-        #promesas h2, #promesas .promise-item { color: white; }
-        #stars-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
+        .gold-dust {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(#D4AF37 1px, transparent 1px);
+            background-size: 50px 50px; opacity: 0.2;
+            animation: floatingDust 40s linear infinite;
         }
-        .promises-list { list-style: none; padding: 0; position: relative; z-index: 1; text-align: center; }
-        .promise-item { font-family: var(--font-title); font-size: 2rem; margin-bottom: 30px; opacity: 0; transform: translateY(50px); transition: all 1s ease; }
-        .promise-item.visible { opacity: 1; transform: translateY(0); }
+        @keyframes floatingDust { 0% {transform: translateY(0) scale(1);} 50% {transform: translateY(-20px) scale(1.05);} 100% {transform: translateY(0) scale(1);} }
 
-        /* Quiz Interactivo */
-        #quiz-container { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        #quiz-question { font-size: 1.4rem; font-weight: bold; margin-bottom: 20px; color: var(--secondary-color); }
-        .quiz-options { display: grid; grid-template-columns: 1fr; gap: 10px; }
-        .quiz-option { background-color: var(--accent-color); color: var(--secondary-color); padding: 15px; border-radius: 10px; border: 2px solid transparent; cursor: pointer; transition: all 0.3s ease; text-align: center; }
-        .quiz-option:hover { background-color: var(--primary-color); color: white; }
-        .quiz-option.selected { border-color: var(--secondary-color); }
-        .quiz-option.correct { background-color: #a7d7c5; color: white; }
-        .quiz-option.incorrect { background-color: #ff6961; color: white; }
-        #quiz-feedback { margin-top: 20px; font-weight: bold; }
-        #quiz-result { text-align: center; font-size: 1.5rem; font-family: var(--font-title); color: var(--primary-color); }
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
 
-        /* Juego Final del Perdón */
-        #juego .content-box {text-align:center;}
-        #question { font-size: 1.5rem; font-weight: bold; color: var(--secondary-color); }
-        .buttons-container { margin-top: 30px; display: flex; justify-content: center; align-items: center; gap: 20px; min-height: 80px;}
-        .btn { padding: 15px 30px; border: none; border-radius: 50px; font-size: 1.2rem; cursor: pointer; transition: all 0.3s ease; color: white; font-weight: bold; }
-        #yesBtn { background-color: #4CAF50; }
-        #noBtn { background-color: #f44336; position: relative; }
-        #system-error, #gracias-mensaje { display: none; margin-top: 30px; }
-        #system-error { padding: 20px; background-color: #2c2c2c; color: #00ff00; font-family: 'Courier New', monospace; border: 2px solid #00ff00; text-align:left;}
-        #gracias-mensaje { font-size: 2rem; font-family: var(--font-title); color: var(--primary-color); }
-
-        /* Animaciones */
-        .reveal { opacity: 0; transform: translateY(100px); transition: all 1.2s ease-in-out; }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-50px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-15px); } 60% { transform: translateY(-10px); } }
-        @keyframes fadeIn { to { opacity: 1; } }
-
-        /* Responsive */
-        @media screen and (max-width: 768px) {
-            header h1 { font-size: 3rem; }
-            section h2 { font-size: 2.5rem; }
+        /* ================= 1. INTRO (CORREGIDO) ================= */
+        #intro-screen {
+            position: fixed; inset: 0; background: #000; z-index: 10000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            padding: 20px; text-align: center;
+            transition: opacity 1s var(--ease), visibility 1s;
         }
+
+        .intro-logo-wrapper {
+            width: 150px; height: 150px; max-width: 40vw; max-height: 40vw; 
+            border-radius: 50%; padding: 4px;
+            background: var(--gold-gradient);
+            box-shadow: 0 0 60px rgba(212,175,55,0.4);
+            margin-bottom: 25px; opacity: 0; transform: scale(0.5);
+        }
+        .intro-logo-wrapper img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid #000; }
+
+        /* TEXTO INTRO */
+        .intro-text-wrapper h1 {
+            font-family: var(--font-head); font-size: 3rem; letter-spacing: 5px; color: #fff; margin: 0;
+            opacity: 0; transform: translateY(20px);
+            background: var(--gold-gradient); -webkit-background-clip: text; color: transparent;
+        }
+        /* Texto Visión */
+        .intro-vision-text {
+            font-size: 1rem; color: #d0d0d0; letter-spacing: 1px; font-weight: 300; margin-top: 15px;
+            opacity: 0; transform: translateY(15px);
+            border-top: 1px solid rgba(212,175,55,0.4); padding-top: 15px; display: inline-block;
+        }
+
+        .start-anim-logo { opacity: 1 !important; transform: scale(1) !important; transition: 1s var(--ease); }
+        .start-anim-text { opacity: 1 !important; transform: translateY(0) !important; transition: 1s var(--ease); }
+
+        @media (max-width: 480px) {
+            .intro-text-wrapper h1 { font-size: 2.2rem; } .intro-vision-text { font-size: 0.85rem; padding: 15px 10px 0 10px; } 
+        }
+
+        /* ================= 2. NAVBAR (SCROLL + TORNADO) ================= */
+        header {
+            position: fixed; top: 0; width: 100%; height: 85px; z-index: 5000;
+            background: rgba(2,2,2,0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex; justify-content: space-between; align-items: center; padding: 0 6%;
+            transition: transform 0.4s ease-in-out;
+        }
+        header.nav-hide { transform: translateY(-100%); }
+
+        .brand-logo { font-family: var(--font-head); font-size: 1.6rem; color: #fff; text-transform: uppercase; }
+        .brand-logo span { color: var(--gold); }
+
+        .desktop-nav { display: flex; gap: 40px; }
+        .menu-link {
+            background: none; border: none; color: #aaa; cursor: pointer;
+            font-family: var(--font-body); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px;
+            transition: 0.3s; position: relative;
+        }
+        .menu-link:hover, .menu-link.active { color: var(--gold); }
+
+        .hamburger-wrap {
+            display: none; width: 32px; height: 32px; cursor: pointer; position: relative; z-index: 6000;
+        }
+        .hamburger-wrap div {
+            position: absolute; width: 100%; height: 2px; background: var(--gold);
+            left: 0; transform-origin: center; transition: all 0.5s var(--ease);
+        }
+        .line1 { top: 30%; } .line2 { top: 50%; transform: translateY(-50%); } .line3 { top: 70%; }
+        .hamburger-wrap.is-active .line1 { top: 50%; transform: translateY(-50%) rotate(405deg); }
+        .hamburger-wrap.is-active .line2 { opacity: 0; transform: translateX(-30px); }
+        .hamburger-wrap.is-active .line3 { top: 50%; transform: translateY(-50%) rotate(-405deg); }
+
+        @media (max-width: 900px) { .desktop-nav { display: none; } .hamburger-wrap { display: block; } }
+
+        .mobile-nav-overlay {
+            position: fixed; top: 0; right: 0; width: 100%; height: 100%; z-index: 5500; background: #080808;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 30px;
+            clip-path: circle(0px at 100% 0%); transition: clip-path 0.7s var(--ease);
+        }
+        .mobile-nav-overlay.reveal { clip-path: circle(150% at 100% 0%); }
+        .mob-item {
+            font-family: var(--font-head); font-size: 2.5rem; color: #fff;
+            opacity: 0; transform: translateY(40px); transition: 0.5s var(--ease);
+            background: none; border: none; cursor: pointer;
+        }
+        .mobile-nav-overlay.reveal .mob-item:nth-child(1) { transition-delay: 0.1s; opacity: 1; transform: translateY(0); }
+        .mobile-nav-overlay.reveal .mob-item:nth-child(2) { transition-delay: 0.2s; opacity: 1; transform: translateY(0); }
+        .mobile-nav-overlay.reveal .mob-item:nth-child(3) { transition-delay: 0.3s; opacity: 1; transform: translateY(0); }
+
+
+        /* ================= 3. SECCIONES Y GRID ================= */
+        main { padding-top: 140px; width: 90%; max-width: 1300px; margin: 0 auto; padding-bottom: 80px; }
+
+        .section-header { text-align: center; margin-bottom: 70px; opacity: 0; transform: translateY(20px); transition: 1s; }
+        .section-header.in-view { opacity: 1; transform: translateY(0); }
+        .section-header h2 { font-family: var(--font-head); font-size: 3rem; color: #fff; margin-bottom: 10px; }
+        .section-header p {
+            color: var(--gold); text-transform: uppercase; letter-spacing: 4px; font-size: 0.8rem;
+            display: inline-block; padding-bottom: 10px; border-bottom: 2px solid var(--gold);
+        }
+        section { display: none; } section.active-sec { display: block; }
+        
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+        @media (max-width: 1100px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 20px;} }
+        @media (max-width: 650px) { .grid { grid-template-columns: 1fr; gap: 40px; } }
+
+        /* ================= 4. CARTAS ANIMADAS 3D (FLIP) ================= */
+        .card {
+            background: var(--dark-card); border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 4px; overflow: hidden; opacity: 0; transform: translateY(30px); transition: 0.4s var(--ease);
+            position: relative; perspective: 1000px; /* IMPORTANTE PARA 3D */
+        }
+        .card.card-appear { opacity: 1; transform: translateY(0); transition: 0.8s var(--ease); }
+        
+        /* Contenedor del giro 3D */
+        .flip-box {
+            width: 100%; aspect-ratio: 4/5; 
+            position: relative; 
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        /* Hover sobre la caja o sobre la imagen activa el giro */
+        .card:hover .flip-box { transform: rotateY(180deg); }
+
+        .flip-front, .flip-back {
+            position: absolute; width: 100%; height: 100%;
+            -webkit-backface-visibility: hidden; backface-visibility: hidden;
+            border-radius: 2px;
+        }
+
+        /* Cara frontal (Imagen) */
+        .flip-front img { 
+            width: 100%; height: 100%; object-fit: cover; 
+            transition: 0.5s; 
+        }
+
+        /* Cara trasera (Logo / Detalle) */
+        .flip-back {
+            background: #080808; 
+            border: 1px solid var(--gold);
+            transform: rotateY(180deg); /* Ya está volteada */
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            background-image: radial-gradient(circle, rgba(212,175,55,0.1), transparent);
+        }
+
+        .logo-back { width: 60px; height: 60px; margin-bottom: 10px; border-radius: 50%; border:2px solid var(--gold); padding:2px; }
+        .text-back { color: var(--gold); font-family: var(--font-head); letter-spacing: 2px; font-size: 1.2rem; }
+
+        .card-tag {
+            position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.8); z-index: 5;
+            border: 1px solid var(--gold); color: var(--gold); padding: 5px 10px;
+            font-size: 0.6rem; text-transform: uppercase; font-weight: bold; pointer-events: none;
+        }
+
+        .info-box { padding: 25px; text-align: center; }
+        .p-name { font-family: var(--font-head); font-size: 1.4rem; margin-bottom: 5px; color: #fff; }
+        .p-price { color: var(--gold); font-size: 1.3rem; font-weight: 700; margin-bottom: 20px; display: block; }
+
+        /* LIQUID BTN */
+        .btn-glow {
+            width: 100%; padding: 16px 0; cursor: pointer;
+            background: linear-gradient(90deg, #aa771c, #ffd700, #aa771c); background-size: 200%; 
+            color: #000; font-weight: 800; border: none; text-transform: uppercase; 
+            letter-spacing: 2px; font-size: 0.75rem; border-radius: 2px; transition: 0.3s;
+            animation: shimmer 3s infinite linear; 
+        }
+        .btn-glow:hover { box-shadow: 0 0 25px rgba(212,175,55,0.7); transform: scale(1.02); }
+        @keyframes shimmer { 0% {background-position: 0% center;} 100% {background-position: 200% center;} }
+
+        /* GHOST BTN */
+        .btn-ghost {
+            background: transparent; border: 1px solid #444; width: 100%; padding: 14px;
+            color: #ccc; margin-top: 10px; text-transform: uppercase; font-size: 0.7rem; 
+            cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px;
+        }
+        .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+        .btn-ghost svg { width: 18px; height: 18px; fill: currentColor; }
+
+        /* ================= 5. INFO SECTION + INSTAGRAM ================= */
+        .info-card {
+            border: 1px solid var(--gold); padding: 60px 20px; max-width: 600px; margin: 0 auto;
+            text-align: center; background: radial-gradient(circle at center, #1a1a1a, #000);
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.05);
+        }
+
+        /* ================= 6. FLOATING WHATSAPP ================= */
+        .wa-float {
+            position: fixed; bottom: 30px; right: 30px; width: 64px; height: 64px;
+            background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 0 20px rgba(37, 211, 102, 0.4); border: 2px solid rgba(255,255,255,0.2);
+            z-index: 9000; transition: 0.3s;
+        }
+        .wa-float:hover { transform: scale(1.1); }
+        .wa-float svg { width: 34px; height: 34px; fill: #fff; }
+
+        /* ================= 7. MODAL ================= */
+        .modal-wrap {
+            position: fixed; inset: 0; z-index: 9999;
+            background: rgba(0,0,0,0.95); backdrop-filter: blur(8px);
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none; transition: 0.5s ease;
+        }
+        .modal-wrap.open { opacity: 1; pointer-events: all; }
+
+        .modal-inner {
+            background: #0f0f0f; border: 1px solid var(--gold);
+            display: flex; width: 90%; max-width: 900px; max-height: 85vh;
+            box-shadow: 0 0 80px rgba(212,175,55,0.2); transform: scale(0.9); transition: 0.5s var(--ease);
+        }
+        .modal-wrap.open .modal-inner { transform: scale(1); }
+        .m-img { flex: 1; overflow: hidden; }
+        .m-img img { width: 100%; height: 100%; object-fit: cover; }
+        .m-content { flex: 1; padding: 40px; overflow-y: auto; display: flex; flex-direction: column; justify-content: center; }
+        .m-close { 
+            position: absolute; top: 15px; right: 20px; font-size: 2rem; color: #fff;
+            background: none; border: none; cursor: pointer; transition: 0.3s;
+        }
+        .m-close:hover { color: var(--gold); transform: rotate(90deg); }
+
+        @media(max-width: 800px) { .modal-inner { flex-direction: column; } .m-img { flex: none; height: 250px; } }
+
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Mi Pochi Bimune...</h1>
-        <p>Un intento desesperado por reconstruir nuestro universo.</p>
-        <div class="scroll-down">Desliza, por favor...</div>
+    <div class="background-world">
+        <div class="gold-dust"></div>
+    </div>
+
+    <!-- 1. INTRO FIXED -->
+    <div id="intro-screen">
+        <div class="intro-logo-wrapper" id="introLogo">
+            <img src="https://z-m-scontent.fbog11-1.fna.fbcdn.net/v/t39.30808-6/588554107_122269714652244757_6039592121799148836_n.jpg?stp=dst-webp_e15_q70_s1080x1080_u&efg=eyJ1cmxnZW4iOiJ1cmxnZW5fZnJvbV91cmwifQ&_nc_cid=1180&_nc_ad=z-m&_nc_rml=0&_nc_ht=z-m-scontent.fbog11-1.fna&_nc_cat=102&_nc_ohc=1ChBqdssMRkQ7kNvwHOQVtD&_nc_gid=XL1e1NM9XjcVAZcUWZYbAA&ccb=1-7&_nc_sid=833d8c&oh=00_Afj59vZ2OE4k0BWAwvk-ohlf9ksgNFstBucuF9QxoJOJpw&oe=692B9C84" alt="Enigma Logo">
+        </div>
+        <div class="intro-text-wrapper" id="introText">
+            <h1>ENIGMA</h1>
+            <div class="intro-vision-text">Visión: Calidad, sorpresa y estilo en cada caja.</div>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <header id="mainNav">
+        <div class="brand-logo">ENIGMA<span>.</span></div>
+        <nav class="desktop-nav">
+            <button class="menu-link active" onclick="switchSection('col-section', this)">Colección</button>
+            <button class="menu-link" onclick="switchSection('makeup-section', this)">Maquillaje</button>
+            <button class="menu-link" onclick="switchSection('info-section', this)">Info</button>
+        </nav>
+        <div class="hamburger-wrap" onclick="toggleMenu()">
+            <div class="line1"></div> <div class="line2"></div> <div class="line3"></div>
+        </div>
     </header>
 
-    <section id="inicio">
-        <div class="container reveal">
-            <h2>Reproduce esto mientras lees...</h2>
-            <p style="font-size: 1.2rem;">Por favor, Pochi, dale play. Esta canción sonaba en mi cabeza mientras te escribía cada palabra...</p>
-            <div class="video-container">
-                <iframe src="https://youtu.be/MVeeRCRw5kM?si=WIEoQaF3_rzCHdGN" title="Sufjan Stevens - Fourth of July" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </div>
-        </div>
-    </section>
+    <div class="mobile-nav-overlay" id="mobileOverlay">
+        <button class="mob-item" onclick="switchSection('col-section', null); toggleMenu()">Colección</button>
+        <button class="mob-item" onclick="switchSection('makeup-section', null); toggleMenu()">Maquillaje</button>
+        <button class="mob-item" onclick="switchSection('info-section', null); toggleMenu()">Info & Soporte</button>
+    </div>
 
-    <section id="carta">
-        <div class="container">
-            <h2 class="reveal">Mi corazón en palabras</h2>
-            <div id="carta-texto" class="content-box reveal">
+    <main>
+
+        <!-- SECCION 1 - COLECCION -->
+        <section id="col-section" class="active-sec">
+            <div class="section-header">
+                <h2>Colección Enigma</h2>
+                <p>Gira la imagen y descubre el misterio</p>
+            </div>
+            
+            <div class="grid">
+                <!-- Card 1 -->
+                <div class="card">
+                    <span class="card-tag">Exclusivo</span>
+                    <div class="flip-box">
+                        <!-- Frente: Imagen -->
+                        <div class="flip-front">
+                            <img src="https://images.unsplash.com/photo-1555449372-525afdd784dc?q=80&w=800" alt="Img">
+                        </div>
+                        <!-- Atrás: Logo -->
+                        <div class="flip-back">
+                            <img src="https://z-m-scontent.fbog11-1.fna.fbcdn.net/v/t39.30808-6/588554107_122269714652244757_6039592121799148836_n.jpg?stp=dst-webp_e15_q70_s1080x1080_u&efg=eyJ1cmxnZW4iOiJ1cmxnZW5fZnJvbV91cmwifQ&_nc_cid=1180&_nc_ad=z-m&_nc_rml=0&_nc_ht=z-m-scontent.fbog11-1.fna&_nc_cat=102&_nc_ohc=1ChBqdssMRkQ7kNvwHOQVtD&_nc_gid=XL1e1NM9XjcVAZcUWZYbAA&ccb=1-7&_nc_sid=833d8c&oh=00_Afj59vZ2OE4k0BWAwvk-ohlf9ksgNFstBucuF9QxoJOJpw&oe=692B9C84" class="logo-back">
+                            <div class="text-back">ENIGMA</div>
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <div class="p-name">Oso Imperial Dorado</div>
+                        <span class="p-price">$45.000</span>
+                        <button class="btn-glow" onclick="whatsapp('Quiero comprar: Oso Imperial')">Ordenar Caja</button>
+                    </div>
                 </div>
-        </div>
-    </section>
 
-    <section id="graduacion">
-        <div class="container" style="text-align: center;">
-            <h2 class="reveal">Un sueño que no quiero perder</h2>
-            <div class="content-box reveal">
-                <div style="font-size: 4rem;">🎓</div>
-                <p>Hay un evento que se acerca, uno de los días más importantes de tu vida: <strong>tu graduación</strong>. He soñado con ese momento. Soñé con verte cruzar ese escenario, con tu toga y birrete, con esa sonrisa de orgullo y éxito que ilumina todo a tu alrededor.</p>
-                <p>No me quiero perder eso. No me imagino no estar ahí, aplaudiendo más fuerte que nadie. Por favor, déjame compartir ese día contigo. Eres mi campeona.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="promesas">
-        <canvas id="stars-canvas"></canvas>
-        <div class="container">
-            <h2 class="reveal">Mis Promesas Bajo las Estrellas</h2>
-            <ul class="promises-list">
-                <li class="promise-item">Prometo escucharte siempre, incluso cuando no tenga las palabras correctas.</li>
-                <li class="promise-item">Prometo ser tu mayor fan en cada uno de tus logros, como tu graduación.</li>
-                <li class="promise-item">Prometo nunca más tomar una decisión tan estúpida que nos aleje.</li>
-                <li class="promise-item">Prometo trabajar cada día para ser el hombre que mereces.</li>
-                <li class="promise-item">Prometo recordarte lo increíble que eres, especialmente en los días que lo olvides.</li>
-            </ul>
-        </div>
-    </section>
-    
-    <section id="quiz">
-        <div class="container">
-            <h2 class="reveal">¿Cuánto nos conocemos?</h2>
-            <div id="quiz-container" class="reveal">
-                <div id="quiz-question"></div>
-                <div class="quiz-options"></div>
-                <div id="quiz-feedback"></div>
-                <button id="next-question-btn" class="btn" style="background-color: var(--primary-color); margin-top: 20px; display: none;">Siguiente</button>
-                <div id="quiz-result"></div>
-            </div>
-        </div>
-    </section>
-    
-    <section id="nuestra-cancion">
-         <div class="container reveal">
-            <h2>Y para el Futuro... Nuestra Canción</h2>
-            <p style="font-size: 1.2rem;">Escúchala... imagina todo lo que podemos construir. Esto es lo que quiero para nosotros.</p>
-            <div class="video-container">
-                 <iframe src="https://www.youtube.com/embed/N8Nzb-oc8XA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-        </div>
-    </section>
-    
-    <section id="juego">
-        <div class="container reveal">
-            <h2>La pregunta más importante...</h2>
-            <div class="content-box">
-                <p id="question">Pochi Bimune, ¿me das la oportunidad de arreglar mi error más grande?</p>
-                <div id="gracias-mensaje">¡Gracias! Prometo no fallarte. Jamás. ❤️</div>
-                <div class="buttons-container">
-                    <button class="btn" id="yesBtn">Sí, hablemos</button>
-                    <button class="btn" id="noBtn">No</button>
+                <!-- Card 2 -->
+                <div class="card">
+                    <span class="card-tag">Nuevo</span>
+                    <div class="flip-box">
+                        <div class="flip-front">
+                            <img src="https://images.unsplash.com/photo-1596704017329-a1d2dc10da56?q=80&w=800" alt="Img">
+                        </div>
+                        <div class="flip-back">
+                            <img src="https://z-m-scontent.fbog11-1.fna.fbcdn.net/v/t39.30808-6/588554107_122269714652244757_6039592121799148836_n.jpg?stp=dst-webp_e15_q70_s1080x1080_u&efg=eyJ1cmxnZW4iOiJ1cmxnZW5fZnJvbV91cmwifQ&_nc_cid=1180&_nc_ad=z-m&_nc_rml=0&_nc_ht=z-m-scontent.fbog11-1.fna&_nc_cat=102&_nc_ohc=1ChBqdssMRkQ7kNvwHOQVtD&_nc_gid=XL1e1NM9XjcVAZcUWZYbAA&ccb=1-7&_nc_sid=833d8c&oh=00_Afj59vZ2OE4k0BWAwvk-ohlf9ksgNFstBucuF9QxoJOJpw&oe=692B9C84" class="logo-back">
+                            <div class="text-back">ENIGMA</div>
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <div class="p-name">Conejo de Luna</div>
+                        <span class="p-price">$45.000</span>
+                        <button class="btn-glow" onclick="whatsapp('Quiero comprar: Conejo de Luna')">Ordenar Caja</button>
+                    </div>
                 </div>
-                <div id="system-error">
-                    <p>&gt; System.Error: 0xHEARTBREAK</p>
-                    <p>&gt; Descripción: Solicitud rechazada. Corazón del sistema no permite esta opción.</p>
-                    <p>&gt; Soy esta página web. Edward puso todo su corazón aquí. Vi lo arrepentido que está. Dale una oportunidad, por favor. Lo quiere intentar de verdad.</p>
+
+                <!-- Card 3 -->
+                <div class="card">
+                    <span class="card-tag">Popular</span>
+                    <div class="flip-box">
+                        <div class="flip-front">
+                            <img src="https://images.unsplash.com/photo-1628148967923-287df5d68d1b?q=80&w=800" alt="Img">
+                        </div>
+                        <div class="flip-back">
+                            <img src="https://z-m-scontent.fbog11-1.fna.fbcdn.net/v/t39.30808-6/588554107_122269714652244757_6039592121799148836_n.jpg?stp=dst-webp_e15_q70_s1080x1080_u&efg=eyJ1cmxnZW4iOiJ1cmxnZW5fZnJvbV91cmwifQ&_nc_cid=1180&_nc_ad=z-m&_nc_rml=0&_nc_ht=z-m-scontent.fbog11-1.fna&_nc_cat=102&_nc_ohc=1ChBqdssMRkQ7kNvwHOQVtD&_nc_gid=XL1e1NM9XjcVAZcUWZYbAA&ccb=1-7&_nc_sid=833d8c&oh=00_Afj59vZ2OE4k0BWAwvk-ohlf9ksgNFstBucuF9QxoJOJpw&oe=692B9C84" class="logo-back">
+                            <div class="text-back">ENIGMA</div>
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <div class="p-name">Zorro del Bosque</div>
+                        <span class="p-price">$45.000</span>
+                        <button class="btn-glow" onclick="whatsapp('Quiero comprar: Zorro del Bosque')">Ordenar Caja</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <footer style="padding: 40px 0; text-align:center;">
-        <p>Hecho con un teclado lleno de lágrimas y un alma llena de esperanza.<br>Siempre tuyo, Edward.</p>
-    </footer>
+        <!-- SECCION 2 - MAQUILLAJE -->
+        <section id="makeup-section">
+            <div class="section-header">
+                <h2>Maquillaje de Lujo</h2>
+                <p>Tu belleza en una caja</p>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <div class="flip-box">
+                        <div class="flip-front"><img src="https://images.unsplash.com/photo-1596462502278-27bfdd403cc2?q=80&w=800" alt="Mk1"></div>
+                        <div class="flip-back"><div class="text-back">VER DETALLES</div></div>
+                    </div>
+                    <div class="info-box">
+                        <div class="p-name">Brillo Eterno</div>
+                        <span class="p-price">$80.000</span>
+                        <button class="btn-ghost" onclick="openModal('Brillo Eterno', 'Paleta de sombras con tonos dorados de alta pigmentación.', '$80.000', 'https://images.unsplash.com/photo-1596462502278-27bfdd403cc2?w=800')">Ver Detalles</button>
+                        <button class="btn-glow" style="margin-top:10px;" onclick="whatsapp('Quiero la caja Brillo Eterno')">Pedir Ahora</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="flip-box">
+                        <div class="flip-front"><img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=800" alt="Mk2"></div>
+                        <div class="flip-back"><div class="text-back">VER DETALLES</div></div>
+                    </div>
+                    <div class="info-box">
+                        <div class="p-name">Esencia Natural</div>
+                        <span class="p-price">$65.000</span>
+                        <button class="btn-ghost" onclick="openModal('Esencia Natural', 'Selección cuidado de piel y tonos nude.', '$65.000', 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=800')">Ver Detalles</button>
+                        <button class="btn-glow" style="margin-top:10px;" onclick="whatsapp('Quiero la caja Esencia Natural')">Pedir Ahora</button>
+                    </div>
+                </div>
+
+                 <div class="card">
+                    <div class="flip-box">
+                        <div class="flip-front"><img src="https://images.unsplash.com/photo-1629198688000-71f23e745b6e?q=80&w=800" alt="Mk3"></div>
+                        <div class="flip-back"><div class="text-back">VER DETALLES</div></div>
+                    </div>
+                    <div class="info-box">
+                        <div class="p-name">Neón Vibrante</div>
+                        <span class="p-price">$90.000</span>
+                        <button class="btn-ghost" onclick="openModal('Neón Vibrante', 'Atrévete a brillar en la oscuridad con pigmentos neón.', '$90.000', 'https://images.unsplash.com/photo-1629198688000-71f23e745b6e?w=800')">Ver Detalles</button>
+                        <button class="btn-glow" style="margin-top:10px;" onclick="whatsapp('Quiero la caja Neón Vibrante')">Pedir Ahora</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCION 3: INFO, SOPORTE Y REDES -->
+        <section id="info-section">
+            <div class="section-header">
+                <h2>Servicio Premium</h2>
+                <p>Soporte y Contacto</p>
+            </div>
+            <div class="info-card">
+                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="1"><path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14v2H5z"></path></svg>
+                
+                <h3 style="margin:20px 0; font-family:var(--font-head); font-size:1.8rem;">Garantía ENIGMA</h3>
+                <p style="color:#bbb; margin-bottom:30px; line-height:1.7;">
+                    Estamos para asesorarte en tu compra y resolver cualquier duda. Calidad garantizada.
+                </p>
+                
+                <button class="btn-glow" style="max-width:350px; margin:0 auto;" onclick="whatsapp('Hola, necesito asistencia con un pedido')">Hablar por WhatsApp</button>
+                
+                <!-- BOTÓN INSTAGRAM -->
+                <button class="btn-ghost" style="max-width:350px; margin:15px auto 0 auto;" onclick="window.open('https://instagram.com/','_blank')">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    Síguenos en Instagram
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FLOATING WHATSAPP -->
+    <a href="#" onclick="whatsapp('Hola Enigma')" class="wa-float" title="Contactar">
+        <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+    </a>
+
+    <!-- MODAL -->
+    <div class="modal-wrap" id="modal">
+        <div class="modal-inner">
+            <button class="m-close" onclick="closeModal()">×</button>
+            <div class="m-img"><img id="mod-img" src=""></div>
+            <div class="m-content">
+                <h2 id="mod-title" style="color:var(--gold); font-family:var(--font-head); margin-bottom:10px; font-size:2rem;"></h2>
+                <span id="mod-price" style="color:#fff; font-size:1.5rem; display:block; margin-bottom:20px;"></span>
+                <p id="mod-desc" style="color:#ccc; margin-bottom:30px; line-height:1.6; padding-left:15px; border-left:2px solid var(--gold);"></p>
+                <button class="btn-glow" id="mod-btn">CONFIRMAR PEDIDO</button>
+            </div>
+        </div>
+    </div>
 
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
+        // INTRO
+        window.onload = function() {
+            setTimeout(() => { document.getElementById('introLogo').classList.add('start-anim-logo'); }, 300);
+            setTimeout(() => { document.getElementById('introText').classList.add('start-anim-text'); }, 1200);
+            setTimeout(() => {
+                const intro = document.getElementById('intro-screen');
+                intro.style.opacity = '0';
+                setTimeout(() => {
+                    intro.style.display = 'none';
+                    initObservers();
+                }, 1000);
+            }, 4200);
+        };
 
-        // --- Lógica para animaciones al hacer scroll ---
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    // Iniciar efectos específicos cuando se ven por primera vez
-                    if (entry.target.id === 'carta-texto' && !entry.target.dataset.typed) {
-                        typewriterEffect();
-                        entry.target.dataset.typed = 'true';
-                    }
-                     if (entry.target.classList.contains('promise-item')) {
-                        entry.target.classList.add('visible');
-                    }
-                }
-            });
-        }, { threshold: 0.2 });
-
-        document.querySelectorAll('.reveal, .promise-item').forEach(el => observer.observe(el));
-
-        // --- Lógica del efecto de Máquina de Escribir ---
-        function typewriterEffect() {
-            const letterContent = [
-                "Mi queridísima Pochi,",
-                "Si estás leyendo esto, gracias. Sé que te he fallado. Sé que te lastimé, y tomar la decisión de terminar fue la estupidez más grande de mi vida. Cada día sin ti es un recordatorio constante de mi error.",
-                "Hoy lloré mucho. Lloré pensando en nosotros, en tus risas. Lloré de arrepentimiento y de miedo. Miedo de haberte perdido para siempre. Me siento completamente perdido sin mi norte, sin mi guía... sin ti.",
-                "No busco excusas, porque no las hay. Te pido, desde el fondo de mi alma rota, que me perdones. Te amo tanto, Pochi. Más de lo que las palabras pueden expresar. Eres mi primer pensamiento al despertar y el último antes de dormir.",
-                "Con todo el amor de mi arrepentido corazón,",
-                "Edward"
-            ];
-            const letterBox = document.getElementById('carta-texto');
-            letterBox.innerHTML = ''; 
-
-            let totalCharDelay = 0;
-            const charInterval = 30; // ms entre caracteres
-
-            letterContent.forEach((paragraphText, pIndex) => {
-                const p = document.createElement('p');
-                letterBox.appendChild(p);
-                for (let i = 0; i < paragraphText.length; i++) {
-                    const charSpan = document.createElement('span');
-                    charSpan.textContent = paragraphText[i];
-                    charSpan.classList.add('typed-char');
-                    charSpan.style.setProperty('--delay', `${totalCharDelay * charInterval}ms`);
-                    p.appendChild(charSpan);
-                    totalCharDelay++;
-                }
-                 totalCharDelay += 15; // Pausa entre párrafos
-            });
+        // NAV Y MENU
+        function toggleMenu() {
+            document.getElementById('mobileOverlay').classList.toggle('reveal');
+            document.querySelector('.hamburger-wrap').classList.toggle('is-active');
         }
-        
-        // --- Lógica del Cielo Estrellado ---
-        const canvas = document.getElementById('stars-canvas');
-        if (canvas) {
-            const ctx = canvas.getContext('2d');
-            canvas.width = window.innerWidth;
-            canvas.height = canvas.parentElement.offsetHeight;
-            let stars = [];
 
-            function createStars() {
-                stars = [];
-                for (let i = 0; i < 150; i++) {
-                    stars.push({
-                        x: Math.random() * canvas.width,
-                        y: Math.random() * canvas.height,
-                        radius: Math.random() * 1.5,
-                        alpha: Math.random(),
-                        dAlpha: Math.random() * 0.02 - 0.01
-                    });
-                }
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const current = window.pageYOffset;
+            const nav = document.getElementById('mainNav');
+            if(current > 50 && current > lastScroll) nav.classList.add('nav-hide');
+            else nav.classList.remove('nav-hide');
+            lastScroll = current;
+        });
+
+        // TABS
+        function switchSection(id, btn) {
+            document.querySelectorAll('section').forEach(s => s.classList.remove('active-sec'));
+            document.getElementById(id).classList.add('active-sec');
+            if(btn) {
+                document.querySelectorAll('.menu-link').forEach(l => l.classList.remove('active'));
+                btn.classList.add('active');
             }
+            window.scrollTo({top:0, behavior:'smooth'});
+            setTimeout(initObservers, 100); 
+        }
 
-            function animateStars() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                stars.forEach(star => {
-                    star.alpha += star.dAlpha;
-                    if (star.alpha <= 0 || star.alpha >= 1) {
-                        star.dAlpha *= -1;
+        // SCROLL REVEAL
+        function initObservers() {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        entry.target.classList.add('card-appear'); 
+                        if(entry.target.classList.contains('section-header')) entry.target.classList.add('in-view');
                     }
-                    ctx.beginPath();
-                    ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
-                    ctx.fill();
                 });
-                requestAnimationFrame(animateStars);
-            }
-            createStars();
-            animateStars();
-            window.addEventListener('resize', () => {
-                canvas.width = window.innerWidth;
-                canvas.height = canvas.parentElement.offsetHeight;
-                createStars();
-            });
-             // Asegurarnos que la altura del canvas se ajuste al contenido
-            const promisesSection = document.getElementById('promesas');
-            new ResizeObserver(() => {
-                canvas.height = promisesSection.offsetHeight;
-                createStars();
-            }).observe(promisesSection);
+            }, {threshold: 0.1});
+            document.querySelectorAll('.card').forEach(c => observer.observe(c));
+            document.querySelectorAll('.section-header').forEach(h => observer.observe(h));
         }
 
-        // --- Lógica del Quiz ---
-        const quizData = [
-            // PERSONALIZA ESTAS PREGUNTAS Y RESPUESTAS
-            { question: "¿Cuál fue el lugar de nuestra primera cita 'oficial'?", options: ["El cine", "Un parque", "Esa cafetería especial", "Tu casa"], answer: 2 },
-            { question: "¿Qué apodo cariñoso uso más contigo?", options: ["Mi amor", "Pochi Bimune", "Cielo", "Bebé"], answer: 1 },
-            { question: "¿Cuál es mi comida favorita que tú preparas (o intentas preparar)?", options: ["Pasta", "Tacos", "Hamburguesas", "Arepas"], answer: 0 },
-            { question: "¿De qué color eran mis ojos cuando te dije 'te amo' por primera vez?", options: ["Color normal", "Llenos de lágrimas de felicidad", "Cerrados por los nervios", "Color amor"], answer: 1 }
-        ];
-
-        let currentQuestionIndex = 0;
-        let score = 0;
-        const questionEl = document.getElementById('quiz-question');
-        const optionsEl = document.querySelector('.quiz-options');
-        const feedbackEl = document.getElementById('quiz-feedback');
-        const nextBtn = document.getElementById('next-question-btn');
-        const resultEl = document.getElementById('quiz-result');
-        
-        function loadQuiz() {
-            feedbackEl.textContent = '';
-            nextBtn.style.display = 'none';
-            const currentQuestion = quizData[currentQuestionIndex];
-            questionEl.innerText = currentQuestion.question;
-            optionsEl.innerHTML = '';
-            currentQuestion.options.forEach((option, index) => {
-                const button = document.createElement('div');
-                button.innerText = option;
-                button.classList.add('quiz-option');
-                button.dataset.index = index;
-                button.addEventListener('click', selectAnswer);
-                optionsEl.appendChild(button);
-            });
+        // ACTIONS
+        function whatsapp(msg) {
+            window.open(`https://wa.me/573008556516?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
-        function selectAnswer(e) {
-            const selectedButton = e.target;
-            const selectedIndex = parseInt(selectedButton.dataset.index);
-            const correctIndex = quizData[currentQuestionIndex].answer;
-            
-            document.querySelectorAll('.quiz-option').forEach(btn => {
-                btn.removeEventListener('click', selectAnswer); // Desactivar opciones
-            });
-
-            if (selectedIndex === correctIndex) {
-                score++;
-                selectedButton.classList.add('correct');
-                feedbackEl.textContent = "¡Correcto! Como si hubiera sido ayer...";
-                feedbackEl.style.color = 'green';
-            } else {
-                selectedButton.classList.add('incorrect');
-                 feedbackEl.textContent = "Quizás me equivoqué... pero lo importante es el recuerdo.";
-                feedbackEl.style.color = 'red';
-            }
-            nextBtn.style.display = 'block';
+        const modal = document.getElementById('modal');
+        function openModal(t, d, p, i) {
+            document.getElementById('mod-title').innerText = t;
+            document.getElementById('mod-desc').innerText = d;
+            document.getElementById('mod-price').innerText = p;
+            document.getElementById('mod-img').src = i;
+            document.getElementById('mod-btn').onclick = () => { whatsapp('Confirmo compra: '+t); closeModal(); };
+            modal.classList.add('open');
         }
+        function closeModal() { modal.classList.remove('open'); }
+        modal.addEventListener('click', (e) => { if(e.target===modal) closeModal(); });
 
-        nextBtn.addEventListener('click', () => {
-            currentQuestionIndex++;
-            if (currentQuestionIndex < quizData.length) {
-                loadQuiz();
-            } else {
-                showResults();
-            }
-        });
-
-        function showResults() {
-            questionEl.style.display = 'none';
-            optionsEl.style.display = 'none';
-            nextBtn.style.display = 'none';
-            feedbackEl.style.display = 'none';
-            resultEl.innerHTML = `No importa la puntuación. Cada segundo a tu lado es un recuerdo que atesoro. Gracias por jugar conmigo.`;
-        }
-        
-        loadQuiz();
-
-
-        // --- Lógica del Juego del Perdón ---
-        const noBtn = document.getElementById('noBtn');
-        const yesBtn = document.getElementById('yesBtn');
-        noBtn.addEventListener('mouseover', () => {
-            const container = noBtn.parentElement;
-            const containerRect = container.getBoundingClientRect();
-            const btnRect = noBtn.getBoundingClientRect();
-            const newTop = Math.random() * (containerRect.height - btnRect.height);
-            const newLeft = Math.random() * (containerRect.width - btnRect.width);
-            
-            noBtn.style.position = 'absolute';
-            noBtn.style.top = `${newTop}px`;
-            noBtn.style.left = `${newLeft}px`;
-        });
-        
-         noBtn.addEventListener('click', () => {
-             document.getElementById('system-error').style.display = 'block';
-         });
-
-        yesBtn.addEventListener('click', () => {
-            document.getElementById('question').style.display = 'none';
-            document.querySelector('.buttons-container').style.display = 'none';
-            document.getElementById('system-error').style.display = 'none';
-            document.getElementById('gracias-mensaje').style.display = 'block';
-            
-            // Opcional: abrir WhatsApp
-             setTimeout(() => {
-                 window.location.href = "https://wa.me/TUNUMERO?text=Hablemos,%20Edward..."; 
-                 // REEMPLAZA TUNUMERO por tu número con código de país, ej: 573001234567
-             }, 2000);
-        });
-    });
     </script>
 </body>
 </html>
