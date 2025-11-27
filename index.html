@@ -47,7 +47,7 @@
         ::-webkit-scrollbar-track { background: #000; }
         ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
 
-        /* ================= 1. INTRO (ACTUALIZADO: MISION Y VISION) ================= */
+        /* ================= 1. INTRO (MISION Y VISION) ================= */
         #intro-screen {
             position: fixed; inset: 0; background: #000; z-index: 10000;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
@@ -56,54 +56,51 @@
         }
 
         .intro-logo-wrapper {
-            width: 150px; height: 150px; max-width: 40vw; max-height: 40vw; 
+            width: 120px; height: 120px; 
             border-radius: 50%; padding: 4px;
             background: var(--gold-gradient);
             box-shadow: 0 0 60px rgba(212,175,55,0.4);
-            margin-bottom: 25px; opacity: 0; transform: scale(0.5);
+            margin-bottom: 20px; opacity: 0; transform: scale(0.5);
+            flex-shrink: 0;
         }
         .intro-logo-wrapper img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid #000; }
 
-        /* TEXTO INTRO */
+        .intro-text-wrapper { max-width: 800px; width: 100%; }
         .intro-text-wrapper h1 {
-            font-family: var(--font-head); font-size: 3rem; letter-spacing: 5px; color: #fff; margin: 0;
+            font-family: var(--font-head); font-size: 2.5rem; letter-spacing: 5px; color: #fff; margin: 0;
             opacity: 0; transform: translateY(20px);
             background: var(--gold-gradient); -webkit-background-clip: text; color: transparent;
         }
 
-        /* NUEVO: ESTILOS PARA MISION Y VISION */
         .mv-box {
-            margin-top: 25px;
+            margin-top: 20px;
             border-top: 1px solid rgba(212,175,55,0.3);
-            padding-top: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+            padding-top: 15px;
+            display: flex; flex-direction: column; gap: 20px;
             opacity: 0; transform: translateY(20px); transition: 1s var(--ease);
+            max-height: 60vh; overflow-y: auto;
         }
-        .mv-item { max-width: 600px; margin: 0 auto; }
+        .mv-item { max-width: 90%; margin: 0 auto; text-align: justify; text-align-last: center; }
         .mv-item strong {
             display: block; color: var(--gold); font-family: var(--font-head); 
-            letter-spacing: 3px; font-size: 0.9rem; margin-bottom: 5px; text-transform: uppercase;
+            letter-spacing: 3px; font-size: 1rem; margin-bottom: 8px; text-transform: uppercase; text-align: center;
         }
         .mv-item span {
-            font-size: 0.9rem; color: #d0d0d0; font-weight: 300; letter-spacing: 0.5px; line-height: 1.4;
+            font-size: 0.85rem; color: #d0d0d0; font-weight: 300; letter-spacing: 0.5px; line-height: 1.5; display: block;
         }
 
-        /* CLASES DE ANIMACION JS */
         .start-anim-logo { opacity: 1 !important; transform: scale(1) !important; transition: 1s var(--ease); }
         .start-anim-text { opacity: 1 !important; transform: translateY(0) !important; transition: 1s var(--ease); }
-        
-        /* Aseguramos que la caja de misión/visión aparezca cuando el padre tenga la clase */
         .intro-text-wrapper.start-anim-text .mv-box { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
 
         @media (max-width: 480px) {
-            .intro-text-wrapper h1 { font-size: 2.2rem; } 
-            .mv-item span { font-size: 0.8rem; }
-            .mv-box { gap: 10px; padding-top: 15px; margin-top: 15px; }
+            .intro-logo-wrapper { width: 100px; height: 100px; }
+            .intro-text-wrapper h1 { font-size: 2rem; } 
+            .mv-item span { font-size: 0.75rem; }
+            .mv-box { gap: 15px; padding-top: 15px; }
         }
 
-        /* ================= 2. NAVBAR (SCROLL + TORNADO) ================= */
+        /* ================= 2. NAVBAR ================= */
         header {
             position: fixed; top: 0; width: 100%; height: 85px; z-index: 5000;
             background: rgba(2,2,2,0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
@@ -153,9 +150,8 @@
         .mobile-nav-overlay.reveal .mob-item:nth-child(2) { transition-delay: 0.2s; opacity: 1; transform: translateY(0); }
         .mobile-nav-overlay.reveal .mob-item:nth-child(3) { transition-delay: 0.3s; opacity: 1; transform: translateY(0); }
 
-
         /* ================= 3. SECCIONES Y GRID ================= */
-        main { padding-top: 140px; width: 90%; max-width: 1300px; margin: 0 auto; padding-bottom: 80px; }
+        main { padding-top: 140px; width: 90%; max-width: 1300px; margin: 0 auto; padding-bottom: 50px; }
 
         .section-header { text-align: center; margin-bottom: 70px; opacity: 0; transform: translateY(20px); transition: 1s; }
         .section-header.in-view { opacity: 1; transform: translateY(0); }
@@ -170,24 +166,19 @@
         @media (max-width: 1100px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 20px;} }
         @media (max-width: 650px) { .grid { grid-template-columns: 1fr; gap: 40px; } }
 
-        /* ================= 4. CARTAS ANIMADAS 3D (FLIP) ================= */
+        /* ================= 4. CARTAS ================= */
         .card {
             background: var(--dark-card); border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 4px; overflow: hidden; opacity: 0; transform: translateY(30px); transition: 0.4s var(--ease);
-            position: relative; perspective: 1000px; /* IMPORTANTE PARA 3D */
+            position: relative; perspective: 1000px; 
         }
         .card.card-appear { opacity: 1; transform: translateY(0); transition: 0.8s var(--ease); }
         
-        /* Contenedor del giro 3D */
         .flip-box {
-            width: 100%; aspect-ratio: 4/5; 
-            position: relative; 
+            width: 100%; aspect-ratio: 4/5; position: relative; 
             transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            transform-style: preserve-3d;
-            cursor: pointer;
+            transform-style: preserve-3d; cursor: pointer;
         }
-
-        /* Hover sobre la caja o sobre la imagen activa el giro */
         .card:hover .flip-box { transform: rotateY(180deg); }
 
         .flip-front, .flip-back {
@@ -195,25 +186,15 @@
             -webkit-backface-visibility: hidden; backface-visibility: hidden;
             border-radius: 2px;
         }
-
-        /* Cara frontal (Imagen) */
-        .flip-front img { 
-            width: 100%; height: 100%; object-fit: cover; 
-            transition: 0.5s; 
-        }
-
-        /* Cara trasera (Logo / Detalle) */
+        .flip-front img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
         .flip-back {
-            background: #080808; 
-            border: 1px solid var(--gold);
-            transform: rotateY(180deg); /* Ya está volteada */
+            background: #080808; border: 1px solid var(--gold);
+            transform: rotateY(180deg); 
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             background-image: radial-gradient(circle, rgba(212,175,55,0.1), transparent);
         }
-
-        .logo-back { width: 60px; height: 60px; margin-bottom: 10px; border-radius: 50%; border:2px solid var(--gold); padding:2px; }
         .text-back { color: var(--gold); font-family: var(--font-head); letter-spacing: 2px; font-size: 1.2rem; }
-
+        
         .card-tag {
             position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.8); z-index: 5;
             border: 1px solid var(--gold); color: var(--gold); padding: 5px 10px;
@@ -224,7 +205,7 @@
         .p-name { font-family: var(--font-head); font-size: 1.4rem; margin-bottom: 5px; color: #fff; }
         .p-price { color: var(--gold); font-size: 1.3rem; font-weight: 700; margin-bottom: 20px; display: block; }
 
-        /* LIQUID BTN */
+        /* ESTILO BOTON PRINCIPAL (GOLD) */
         .btn-glow {
             width: 100%; padding: 16px 0; cursor: pointer;
             background: linear-gradient(90deg, #aa771c, #ffd700, #aa771c); background-size: 200%; 
@@ -235,21 +216,35 @@
         .btn-glow:hover { box-shadow: 0 0 25px rgba(212,175,55,0.7); transform: scale(1.02); }
         @keyframes shimmer { 0% {background-position: 0% center;} 100% {background-position: 200% center;} }
 
-        /* GHOST BTN */
+        /* ESTILO BOTON SECUNDARIO (GHOST/INSTAGRAM) */
         .btn-ghost {
             background: transparent; border: 1px solid #444; width: 100%; padding: 14px;
             color: #ccc; margin-top: 10px; text-transform: uppercase; font-size: 0.7rem; 
             cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px;
+            border-radius: 2px;
         }
         .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
         .btn-ghost svg { width: 18px; height: 18px; fill: currentColor; }
-
-        /* ================= 5. INFO SECTION + INSTAGRAM ================= */
+        
+        /* ================= 5. INFO SECTION Y POLITICAS ================= */
         .info-card {
-            border: 1px solid var(--gold); padding: 60px 20px; max-width: 600px; margin: 0 auto;
+            border: 1px solid var(--gold); padding: 50px 20px; max-width: 600px; margin: 0 auto 50px auto;
             text-align: center; background: radial-gradient(circle at center, #1a1a1a, #000);
             box-shadow: 0 0 50px rgba(212, 175, 55, 0.05);
         }
+
+        .policies-container {
+            max-width: 1000px; margin: 0 auto;
+            border-top: 1px solid #333; padding-top: 40px;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+            font-size: 0.75rem; color: #888; text-align: left;
+        }
+        .policy-col h4 {
+            color: var(--gold); font-family: var(--font-head); margin-bottom: 10px; font-size: 0.9rem;
+        }
+        .policy-col p { margin-bottom: 10px; line-height: 1.5; text-align: justify; }
+
+        @media (max-width: 768px) { .policies-container { grid-template-columns: 1fr; gap: 30px; } }
 
         /* ================= 6. FLOATING WHATSAPP ================= */
         .wa-float {
@@ -261,32 +256,6 @@
         .wa-float:hover { transform: scale(1.1); }
         .wa-float svg { width: 34px; height: 34px; fill: #fff; }
 
-        /* ================= 7. MODAL ================= */
-        .modal-wrap {
-            position: fixed; inset: 0; z-index: 9999;
-            background: rgba(0,0,0,0.95); backdrop-filter: blur(8px);
-            display: flex; align-items: center; justify-content: center;
-            opacity: 0; pointer-events: none; transition: 0.5s ease;
-        }
-        .modal-wrap.open { opacity: 1; pointer-events: all; }
-
-        .modal-inner {
-            background: #0f0f0f; border: 1px solid var(--gold);
-            display: flex; width: 90%; max-width: 900px; max-height: 85vh;
-            box-shadow: 0 0 80px rgba(212,175,55,0.2); transform: scale(0.9); transition: 0.5s var(--ease);
-        }
-        .modal-wrap.open .modal-inner { transform: scale(1); }
-        .m-img { flex: 1; overflow: hidden; }
-        .m-img img { width: 100%; height: 100%; object-fit: cover; }
-        .m-content { flex: 1; padding: 40px; overflow-y: auto; display: flex; flex-direction: column; justify-content: center; }
-        .m-close { 
-            position: absolute; top: 15px; right: 20px; font-size: 2rem; color: #fff;
-            background: none; border: none; cursor: pointer; transition: 0.3s;
-        }
-        .m-close:hover { color: var(--gold); transform: rotate(90deg); }
-
-        @media(max-width: 800px) { .modal-inner { flex-direction: column; } .m-img { flex: none; height: 250px; } }
-
     </style>
 </head>
 <body>
@@ -295,24 +264,23 @@
         <div class="gold-dust"></div>
     </div>
 
+    <!-- INTRO -->
     <div id="intro-screen">
         <div class="intro-logo-wrapper" id="introLogo">
             <img src="https://scontent-bog2-1.xx.fbcdn.net/v/t39.30808-6/588554107_122269714652244757_6039592121799148836_n.jpg?stp=dst-webp_e15_q70_s720x720_u&efg=eyJ1cmxnZW4iOiJ1cmxnZW5fZnJvbV91cmwifQ&_nc_cid=0&_nc_ad=z-m&_nc_rml=0&_nc_ht=scontent-bog2-1.xx&_nc_cat=102&_nc_ohc=LCLvXZKuZmgQ7kNvwE1xpE9&_nc_gid=dviYBQDvsUjldjw1QGOXrg&ccb=1-7&_nc_sid=833d8c&oh=00_Afgg1PjAY6JF4W5Vs5QB3myOubGYaBMb6qJyI4t8X3kYYg&oe=692D96C4" alt="Enigma Logo">
         </div>
         <div class="intro-text-wrapper" id="introText">
             <h1>ENIGMA</h1>
-            
             <div class="mv-box">
                 <div class="mv-item">
                     <strong>Misión</strong>
-                    <span>Inspirar elegancia y misterio en cada detalle, creando momentos únicos.</span>
+                    <span>Enigma busca crear experiencias únicas y memorables mediante cajas misteriosas temáticas que combinan maquillaje, belleza y coleccionables exclusivos. Nuestra misión es sorprender y emocionar a los clientes con productos curados con intención, estética y creatividad, brindando calidad, variedad y una experiencia innovadora que conecte emocionalmente y refleje nuestra pasión por el diseño y la magia de descubrir.</span>
                 </div>
                 <div class="mv-item">
                     <strong>Visión</strong>
-                    <span>Ser el referente de lujo, calidad y sorpresa en cada caja entregada.</span>
+                    <span>Ser una marca líder en Colombia en cajas misteriosas temáticas, reconocida por su creatividad, calidad y capacidad de generar experiencias emocionales únicas. A futuro, aspiramos a expandirnos mediante ediciones especiales, alianzas, una comunidad fiel y una presencia digital sólida, evolucionando hacia suscripciones mensuales, líneas propias y llegada a mercados internacionales con una propuesta original y sostenible.</span>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -343,6 +311,7 @@
             </div>
             
             <div class="grid">
+                <!-- ITEM 1 -->
                 <div class="card">
                     <span class="card-tag">Exclusivo</span>
                     <div class="flip-box">
@@ -350,7 +319,6 @@
                             <img src="https://scontent-bog2-1.xx.fbcdn.net/v/t39.30808-6/588554107_122269714652244757_6039592121799148836_n.jpg?stp=dst-webp_e15_q70_s720x720_u&efg=eyJ1cmxnZW4iOiJ1cmxnZW5fZnJvbV91cmwifQ&_nc_cid=0&_nc_ad=z-m&_nc_rml=0&_nc_ht=scontent-bog2-1.xx&_nc_cat=102&_nc_ohc=LCLvXZKuZmgQ7kNvwE1xpE9&_nc_gid=dviYBQDvsUjldjw1QGOXrg&ccb=1-7&_nc_sid=833d8c&oh=00_Afgg1PjAY6JF4W5Vs5QB3myOubGYaBMb6qJyI4t8X3kYYg&oe=692D96C4" alt="Img">
                         </div>
                         <div class="flip-back">
-                            <img src="https://scontent-bog2-1.xx.fbcdn.net/v/t39.30808-6/588554107_122269714652244757_6039592121799148836_n.jpg?stp=dst-webp_e15_q70_s720x720_u&efg=eyJ1cmxnZW4iOiJ1cmxnZW5fZnJvbV91cmwifQ&_nc_cid=0&_nc_ad=z-m&_nc_rml=0&_nc_ht=scontent-bog2-1.xx&_nc_cat=102&_nc_ohc=LCLvXZKuZmgQ7kNvwE1xpE9&_nc_gid=dviYBQDvsUjldjw1QGOXrg&ccb=1-7&_nc_sid=833d8c&oh=00_Afgg1PjAY6JF4W5Vs5QB3myOubGYaBMb6qJyI4t8X3kYYg&oe=692D96C4" class="logo-back">
                             <div class="text-back">ENIGMA</div>
                         </div>
                     </div>
@@ -361,6 +329,7 @@
                     </div>
                 </div>
 
+                <!-- ITEM 2 -->
                 <div class="card">
                     <span class="card-tag">Nuevo</span>
                     <div class="flip-box">
@@ -368,7 +337,6 @@
                             <img src="https://scontent-bog2-1.xx.fbcdn.net/v/t39.30808-6/588554107_122269714652244757_6039592121799148836_n.jpg?stp=dst-webp_e15_q70_s720x720_u&efg=eyJ1cmxnZW4iOiJ1cmxnZW5fZnJvbV91cmwifQ&_nc_cid=0&_nc_ad=z-m&_nc_rml=0&_nc_ht=scontent-bog2-1.xx&_nc_cat=102&_nc_ohc=LCLvXZKuZmgQ7kNvwE1xpE9&_nc_gid=dviYBQDvsUjldjw1QGOXrg&ccb=1-7&_nc_sid=833d8c&oh=00_Afgg1PjAY6JF4W5Vs5QB3myOubGYaBMb6qJyI4t8X3kYYg&oe=692D96C4" alt="Img">
                         </div>
                         <div class="flip-back">
-                            <img src="https://scontent-bog2-1.xx.fbcdn.net/v/t39.30808-6/588554107_122269714652244757_6039592121799148836_n.jpg?stp=dst-webp_e15_q70_s720x720_u&efg=eyJ1cmxnZW4iOiJ1cmxnZW5fZnJvbV91cmwifQ&_nc_cid=0&_nc_ad=z-m&_nc_rml=0&_nc_ht=scontent-bog2-1.xx&_nc_cat=102&_nc_ohc=LCLvXZKuZmgQ7kNvwE1xpE9&_nc_gid=dviYBQDvsUjldjw1QGOXrg&ccb=1-7&_nc_sid=833d8c&oh=00_Afgg1PjAY6JF4W5Vs5QB3myOubGYaBMb6qJyI4t8X3kYYg&oe=692D96C4" class="logo-back">
                             <div class="text-back">ENIGMA</div>
                         </div>
                     </div>
@@ -379,6 +347,7 @@
                     </div>
                 </div>
 
+                <!-- ITEM 3 -->
                 <div class="card">
                     <span class="card-tag">Popular</span>
                     <div class="flip-box">
@@ -386,7 +355,6 @@
                             <img src="https://scontent-bog2-1.xx.fbcdn.net/v/t39.30808-6/588554107_122269714652244757_6039592121799148836_n.jpg?stp=dst-webp_e15_q70_s720x720_u&efg=eyJ1cmxnZW4iOiJ1cmxnZW5fZnJvbV91cmwifQ&_nc_cid=0&_nc_ad=z-m&_nc_rml=0&_nc_ht=scontent-bog2-1.xx&_nc_cat=102&_nc_ohc=LCLvXZKuZmgQ7kNvwE1xpE9&_nc_gid=dviYBQDvsUjldjw1QGOXrg&ccb=1-7&_nc_sid=833d8c&oh=00_Afgg1PjAY6JF4W5Vs5QB3myOubGYaBMb6qJyI4t8X3kYYg&oe=692D96C4" alt="Img">
                         </div>
                         <div class="flip-back">
-                            <img src="https://scontent-bog2-1.xx.fbcdn.net/v/t39.30808-6/588554107_122269714652244757_6039592121799148836_n.jpg?stp=dst-webp_e15_q70_s720x720_u&efg=eyJ1cmxnZW4iOiJ1cmxnZW5fZnJvbV91cmwifQ&_nc_cid=0&_nc_ad=z-m&_nc_rml=0&_nc_ht=scontent-bog2-1.xx&_nc_cat=102&_nc_ohc=LCLvXZKuZmgQ7kNvwE1xpE9&_nc_gid=dviYBQDvsUjldjw1QGOXrg&ccb=1-7&_nc_sid=833d8c&oh=00_Afgg1PjAY6JF4W5Vs5QB3myOubGYaBMb6qJyI4t8X3kYYg&oe=692D96C4" class="logo-back">
                             <div class="text-back">ENIGMA</div>
                         </div>
                     </div>
@@ -405,42 +373,43 @@
                 <p>Tu belleza en una caja</p>
             </div>
             <div class="grid">
+                <!-- MAKEUP 1 -->
                 <div class="card">
                     <div class="flip-box">
                         <div class="flip-front"><img src="https://scontent-bog2-1.xx.fbcdn.net/v/t39.30808-6/588554107_122269714652244757_6039592121799148836_n.jpg?stp=dst-webp_e15_q70_s720x720_u&efg=eyJ1cmxnZW4iOiJ1cmxnZW5fZnJvbV91cmwifQ&_nc_cid=0&_nc_ad=z-m&_nc_rml=0&_nc_ht=scontent-bog2-1.xx&_nc_cat=102&_nc_ohc=LCLvXZKuZmgQ7kNvwE1xpE9&_nc_gid=dviYBQDvsUjldjw1QGOXrg&ccb=1-7&_nc_sid=833d8c&oh=00_Afgg1PjAY6JF4W5Vs5QB3myOubGYaBMb6qJyI4t8X3kYYg&oe=692D96C4" alt="Mk1"></div>
-                        <div class="flip-back"><div class="text-back">VER DETALLES</div></div>
+                        <div class="flip-back"><div class="text-back">ENIGMA</div></div>
                     </div>
                     <div class="info-box">
                         <div class="p-name">Brillo Eterno</div>
                         <span class="p-price">$80.000</span>
-                        <button class="btn-ghost" onclick="openModal('Brillo Eterno', 'Paleta de sombras con tonos dorados de alta pigmentación.', '$80.000', 'https://scontent-bog2-1.xx.fbcdn.net/v/t39.30808-6/588554107_122269714652244757_6039592121799148836_n.jpg?stp=dst-webp_e15_q70_s720x720_u&efg=eyJ1cmxnZW4iOiJ1cmxnZW5fZnJvbV91cmwifQ&_nc_cid=0&_nc_ad=z-m&_nc_rml=0&_nc_ht=scontent-bog2-1.xx&_nc_cat=102&_nc_ohc=LCLvXZKuZmgQ7kNvwE1xpE9&_nc_gid=dviYBQDvsUjldjw1QGOXrg&ccb=1-7&_nc_sid=833d8c&oh=00_Afgg1PjAY6JF4W5Vs5QB3myOubGYaBMb6qJyI4t8X3kYYg&oe=692D96C4')">Ver Detalles</button>
-                        <button class="btn-glow" style="margin-top:10px;" onclick="whatsapp('Quiero la caja Brillo Eterno')">Pedir Ahora</button>
+                        <!-- SOLO 1 BOTON "Pedir Ahora" -->
+                        <button class="btn-glow" onclick="whatsapp('Quiero la caja Brillo Eterno')">Pedir Ahora</button>
                     </div>
                 </div>
 
+                <!-- MAKEUP 2 -->
                 <div class="card">
                     <div class="flip-box">
                         <div class="flip-front"><img src="https://scontent-bog2-1.xx.fbcdn.net/v/t39.30808-6/588554107_122269714652244757_6039592121799148836_n.jpg?stp=dst-webp_e15_q70_s720x720_u&efg=eyJ1cmxnZW4iOiJ1cmxnZW5fZnJvbV91cmwifQ&_nc_cid=0&_nc_ad=z-m&_nc_rml=0&_nc_ht=scontent-bog2-1.xx&_nc_cat=102&_nc_ohc=LCLvXZKuZmgQ7kNvwE1xpE9&_nc_gid=dviYBQDvsUjldjw1QGOXrg&ccb=1-7&_nc_sid=833d8c&oh=00_Afgg1PjAY6JF4W5Vs5QB3myOubGYaBMb6qJyI4t8X3kYYg&oe=692D96C4" alt="Mk2"></div>
-                        <div class="flip-back"><div class="text-back">VER DETALLES</div></div>
+                        <div class="flip-back"><div class="text-back">ENIGMA</div></div>
                     </div>
                     <div class="info-box">
                         <div class="p-name">Esencia Natural</div>
                         <span class="p-price">$65.000</span>
-                        <button class="btn-ghost" onclick="openModal('Esencia Natural', 'Selección cuidado de piel y tonos nude.', '$65.000', 'https://scontent-bog2-1.xx.fbcdn.net/v/t39.30808-6/588554107_122269714652244757_6039592121799148836_n.jpg?stp=dst-webp_e15_q70_s720x720_u&efg=eyJ1cmxnZW4iOiJ1cmxnZW5fZnJvbV91cmwifQ&_nc_cid=0&_nc_ad=z-m&_nc_rml=0&_nc_ht=scontent-bog2-1.xx&_nc_cat=102&_nc_ohc=LCLvXZKuZmgQ7kNvwE1xpE9&_nc_gid=dviYBQDvsUjldjw1QGOXrg&ccb=1-7&_nc_sid=833d8c&oh=00_Afgg1PjAY6JF4W5Vs5QB3myOubGYaBMb6qJyI4t8X3kYYg&oe=692D96C4')">Ver Detalles</button>
-                        <button class="btn-glow" style="margin-top:10px;" onclick="whatsapp('Quiero la caja Esencia Natural')">Pedir Ahora</button>
+                        <button class="btn-glow" onclick="whatsapp('Quiero la caja Esencia Natural')">Pedir Ahora</button>
                     </div>
                 </div>
 
+                <!-- MAKEUP 3 -->
                  <div class="card">
                     <div class="flip-box">
                         <div class="flip-front"><img src="https://scontent-bog2-1.xx.fbcdn.net/v/t39.30808-6/588554107_122269714652244757_6039592121799148836_n.jpg?stp=dst-webp_e15_q70_s720x720_u&efg=eyJ1cmxnZW4iOiJ1cmxnZW5fZnJvbV91cmwifQ&_nc_cid=0&_nc_ad=z-m&_nc_rml=0&_nc_ht=scontent-bog2-1.xx&_nc_cat=102&_nc_ohc=LCLvXZKuZmgQ7kNvwE1xpE9&_nc_gid=dviYBQDvsUjldjw1QGOXrg&ccb=1-7&_nc_sid=833d8c&oh=00_Afgg1PjAY6JF4W5Vs5QB3myOubGYaBMb6qJyI4t8X3kYYg&oe=692D96C4" alt="Mk3"></div>
-                        <div class="flip-back"><div class="text-back">VER DETALLES</div></div>
+                        <div class="flip-back"><div class="text-back">ENIGMA</div></div>
                     </div>
                     <div class="info-box">
                         <div class="p-name">Neón Vibrante</div>
                         <span class="p-price">$90.000</span>
-                        <button class="btn-ghost" onclick="openModal('Neón Vibrante', 'Atrévete a brillar en la oscuridad con pigmentos neón.', '$90.000', 'https://scontent-bog2-1.xx.fbcdn.net/v/t39.30808-6/588554107_122269714652244757_6039592121799148836_n.jpg?stp=dst-webp_e15_q70_s720x720_u&efg=eyJ1cmxnZW4iOiJ1cmxnZW5fZnJvbV91cmwifQ&_nc_cid=0&_nc_ad=z-m&_nc_rml=0&_nc_ht=scontent-bog2-1.xx&_nc_cat=102&_nc_ohc=LCLvXZKuZmgQ7kNvwE1xpE9&_nc_gid=dviYBQDvsUjldjw1QGOXrg&ccb=1-7&_nc_sid=833d8c&oh=00_Afgg1PjAY6JF4W5Vs5QB3myOubGYaBMb6qJyI4t8X3kYYg&oe=692D96C4')">Ver Detalles</button>
-                        <button class="btn-glow" style="margin-top:10px;" onclick="whatsapp('Quiero la caja Neón Vibrante')">Pedir Ahora</button>
+                        <button class="btn-glow" onclick="whatsapp('Quiero la caja Neón Vibrante')">Pedir Ahora</button>
                     </div>
                 </div>
             </div>
@@ -451,21 +420,38 @@
                 <h2>Servicio Premium</h2>
                 <p>Soporte y Contacto</p>
             </div>
+            
             <div class="info-card">
                 <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="1"><path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14v2H5z"></path></svg>
-                
                 <h3 style="margin:20px 0; font-family:var(--font-head); font-size:1.8rem;">Garantía ENIGMA</h3>
                 <p style="color:#bbb; margin-bottom:30px; line-height:1.7;">
                     Estamos para asesorarte en tu compra y resolver cualquier duda. Calidad garantizada.
                 </p>
                 
+                <!-- BOTON WHATSAPP -->
                 <button class="btn-glow" style="max-width:350px; margin:0 auto;" onclick="whatsapp('Hola, necesito asistencia con un pedido')">Hablar por WhatsApp</button>
                 
+                <!-- BOTON INSTAGRAM AGREGADO -->
                 <button class="btn-ghost" style="max-width:350px; margin:15px auto 0 auto;" onclick="window.open('https://instagram.com/','_blank')">
                     <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                     Síguenos en Instagram
                 </button>
             </div>
+
+            <!-- POLITICAS DENTRO DE INFO -->
+            <div class="policies-container">
+                <div class="policy-col">
+                    <h4>TÉRMINOS Y CONDICIONES</h4>
+                    <p>Bienvenido a ENIGMA. Al adquirir nuestras "Cajas Misteriosas" y productos de maquillaje, aceptas los siguientes términos: 1. Los productos dentro de las cajas sorpresa son aleatorios y se basan en la temática seleccionada (Oso, Conejo, Zorro, etc.). No se aceptan cambios por gusto personal, únicamente por defectos de fábrica comprobados en las primeras 24 horas de recepción. 2. Los tiempos de envío pueden variar entre 2 a 5 días hábiles según la ubicación en Colombia.</p>
+                    <p>Propiedad Intelectual: Todo el contenido visual, logotipos y diseños de ENIGMA están protegidos. El uso no autorizado será sancionado.</p>
+                </div>
+                <div class="policy-col">
+                    <h4>POLÍTICA DE PRIVACIDAD (Habeas Data)</h4>
+                    <p>En cumplimiento de la Ley 1581 de 2012 y el Decreto 1377 de 2013, ENIGMA informa que los datos personales recolectados (nombre, teléfono, dirección) serán utilizados exclusivamente para: A) Procesamiento y entrega de pedidos. B) Comunicación sobre el estado de la compra. C) Envío de novedades y promociones exclusivas si el cliente lo autoriza.</p>
+                    <p>Tus datos están protegidos bajo estándares de seguridad y no serán compartidos con terceros ajenos a la logística de envío. Tienes derecho a conocer, actualizar y rectificar tus datos enviando una solicitud a nuestro canal de WhatsApp.</p>
+                </div>
+            </div>
+
         </section>
 
     </main>
@@ -473,19 +459,6 @@
     <a href="#" onclick="whatsapp('Hola Enigma')" class="wa-float" title="Contactar">
         <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
     </a>
-
-    <div class="modal-wrap" id="modal">
-        <div class="modal-inner">
-            <button class="m-close" onclick="closeModal()">×</button>
-            <div class="m-img"><img id="mod-img" src=""></div>
-            <div class="m-content">
-                <h2 id="mod-title" style="color:var(--gold); font-family:var(--font-head); margin-bottom:10px; font-size:2rem;"></h2>
-                <span id="mod-price" style="color:#fff; font-size:1.5rem; display:block; margin-bottom:20px;"></span>
-                <p id="mod-desc" style="color:#ccc; margin-bottom:30px; line-height:1.6; padding-left:15px; border-left:2px solid var(--gold);"></p>
-                <button class="btn-glow" id="mod-btn">CONFIRMAR PEDIDO</button>
-            </div>
-        </div>
-    </div>
 
     <script>
         // INTRO
@@ -499,7 +472,7 @@
                     intro.style.display = 'none';
                     initObservers();
                 }, 1000);
-            }, 5500); 
+            }, 7000); 
         };
 
         // NAV Y MENU
@@ -547,19 +520,6 @@
         function whatsapp(msg) {
             window.open(`https://wa.me/573008556516?text=${encodeURIComponent(msg)}`, '_blank');
         }
-
-        const modal = document.getElementById('modal');
-        function openModal(t, d, p, i) {
-            document.getElementById('mod-title').innerText = t;
-            document.getElementById('mod-desc').innerText = d;
-            document.getElementById('mod-price').innerText = p;
-            document.getElementById('mod-img').src = i;
-            document.getElementById('mod-btn').onclick = () => { whatsapp('Confirmo compra: '+t); closeModal(); };
-            modal.classList.add('open');
-        }
-        function closeModal() { modal.classList.remove('open'); }
-        modal.addEventListener('click', (e) => { if(e.target===modal) closeModal(); });
-
     </script>
 </body>
-</html>
+                                </html>
