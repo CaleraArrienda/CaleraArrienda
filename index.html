@@ -2,524 +2,540 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ENIGMA | Luxury Experience</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Montserrat:wght@200;300;400;600&display=swap" rel="stylesheet">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi Pochi 💖</title>
+    <!-- Fuentes Bonitas -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+    <!-- Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <style>
-        /* ================= VARIABLES ================= */
+        /* =========================================
+           ESTILOS (CSS)
+           ========================================= */
         :root {
-            --gold: #D4AF37;
-            --gold-gradient: linear-gradient(135deg, #8a6e2f 0%, #ffe97d 50%, #8a6e2f 100%);
-            --black: #020202;
-            --dark-card: rgba(15, 15, 15, 0.75);
-            --font-head: 'Cinzel', serif;
-            --font-body: 'Montserrat', sans-serif;
-            --ease: cubic-bezier(0.23, 1, 0.32, 1);
+            --primary: #ff6b81;
+            --secondary: #ff4757;
+            --bg-color: #ffeaa7;
+            --text: #2f3542;
+            --glass: rgba(255, 255, 255, 0.95);
+            --shadow: 0 10px 20px rgba(0,0,0,0.15);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            background-color: var(--black);
-            color: #fff;
-            font-family: var(--font-body);
-            overflow-x: hidden;
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            text-align: center;
+            color: var(--text);
+            user-select: none;
+            padding: 20px;
         }
 
-        /* FONDO PARTICULAS */
-        .background-world {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-            background: radial-gradient(circle at 50% 50%, #151515 0%, #000 90%);
-        }
-        .gold-dust {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: radial-gradient(#D4AF37 1px, transparent 1px);
-            background-size: 50px 50px; opacity: 0.2;
-            animation: floatingDust 40s linear infinite;
-        }
-        @keyframes floatingDust { 0% {transform: translateY(0) scale(1);} 50% {transform: translateY(-20px) scale(1.05);} 100% {transform: translateY(0) scale(1);} }
-
-        /* SCROLLBAR */
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
-
-        /* ================= 1. INTRO (MISION Y VISION) ================= */
-        #intro-screen {
-            position: fixed; inset: 0; background: #000; z-index: 10000;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            padding: 20px; text-align: center;
-            transition: opacity 1s var(--ease), visibility 1s;
+        /* Contenedor Principal */
+        .game-container {
+            width: 100%;
+            max-width: 500px;
+            background: var(--glass);
+            border-radius: 25px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            position: relative;
+            transition: all 0.5s ease;
+            backdrop-filter: blur(5px);
+            border: 4px solid white;
         }
 
-        .intro-logo-wrapper {
-            width: 120px; height: 120px; 
-            border-radius: 50%; padding: 4px;
-            background: var(--gold-gradient);
-            box-shadow: 0 0 60px rgba(212,175,55,0.4);
-            margin-bottom: 20px; opacity: 0; transform: scale(0.5);
-            flex-shrink: 0;
-        }
-        .intro-logo-wrapper img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid #000; }
-
-        .intro-text-wrapper { max-width: 800px; width: 100%; }
-        .intro-text-wrapper h1 {
-            font-family: var(--font-head); font-size: 2.5rem; letter-spacing: 5px; color: #fff; margin: 0;
-            opacity: 0; transform: translateY(20px);
-            background: var(--gold-gradient); -webkit-background-clip: text; color: transparent;
+        h1, h2 {
+            font-family: 'Fredoka One', cursive;
+            color: var(--secondary);
+            margin-bottom: 15px;
         }
 
-        .mv-box {
+        h1 { font-size: 2rem; }
+        h2 { font-size: 1.5rem; }
+
+        p { margin-bottom: 20px; font-size: 1.1rem; line-height: 1.5; }
+
+        /* Botones Bonitos */
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Fredoka One', cursive;
+            box-shadow: 0 5px 0 #e84118;
+            transition: transform 0.1s;
+            margin-top: 10px;
+            width: 100%;
+            touch-action: manipulation;
+        }
+
+        .btn:active {
+            transform: translateY(5px);
+            box-shadow: none;
+        }
+
+        /* Barra de Progreso */
+        .progress-container {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            max-width: 400px;
+            height: 20px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 10px;
+            overflow: hidden;
+            z-index: 100;
+            border: 2px solid white;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+            transition: width 0.5s ease;
+        }
+
+        /* PANTALLAS (Secciones) */
+        .screen { display: none; animation: popIn 0.5s ease; }
+        .screen.active { display: block; }
+
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* --- NIVEL 1: ATRAPA BESOS --- */
+        #game-area-1 {
+            height: 250px;
+            position: relative;
+            background: #fff0f0;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: crosshair;
+            border: 2px dashed var(--primary);
+            touch-action: none; /* Mejor para celular */
+        }
+        .falling-heart {
+            position: absolute;
+            font-size: 2.5rem;
+            cursor: pointer;
+            animation: float 2s infinite;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* --- NIVEL 2: MEMORIA --- */
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
             margin-top: 20px;
-            border-top: 1px solid rgba(212,175,55,0.3);
-            padding-top: 15px;
-            display: flex; flex-direction: column; gap: 20px;
-            opacity: 0; transform: translateY(20px); transition: 1s var(--ease);
-            max-height: 60vh; overflow-y: auto;
         }
-        .mv-item { max-width: 90%; margin: 0 auto; text-align: justify; text-align-last: center; }
-        .mv-item strong {
-            display: block; color: var(--gold); font-family: var(--font-head); 
-            letter-spacing: 3px; font-size: 1rem; margin-bottom: 8px; text-transform: uppercase; text-align: center;
-        }
-        .mv-item span {
-            font-size: 0.85rem; color: #d0d0d0; font-weight: 300; letter-spacing: 0.5px; line-height: 1.5; display: block;
-        }
-
-        .start-anim-logo { opacity: 1 !important; transform: scale(1) !important; transition: 1s var(--ease); }
-        .start-anim-text { opacity: 1 !important; transform: translateY(0) !important; transition: 1s var(--ease); }
-        .intro-text-wrapper.start-anim-text .mv-box { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
-
-        @media (max-width: 480px) {
-            .intro-logo-wrapper { width: 100px; height: 100px; }
-            .intro-text-wrapper h1 { font-size: 2rem; } 
-            .mv-item span { font-size: 0.75rem; }
-            .mv-box { gap: 15px; padding-top: 15px; }
-        }
-
-        /* ================= 2. NAVBAR ================= */
-        header {
-            position: fixed; top: 0; width: 100%; height: 85px; z-index: 5000;
-            background: rgba(2,2,2,0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            display: flex; justify-content: space-between; align-items: center; padding: 0 6%;
-            transition: transform 0.4s ease-in-out;
-        }
-        header.nav-hide { transform: translateY(-100%); }
-
-        .brand-logo { font-family: var(--font-head); font-size: 1.6rem; color: #fff; text-transform: uppercase; }
-        .brand-logo span { color: var(--gold); }
-
-        .desktop-nav { display: flex; gap: 40px; }
-        .menu-link {
-            background: none; border: none; color: #aaa; cursor: pointer;
-            font-family: var(--font-body); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px;
-            transition: 0.3s; position: relative;
-        }
-        .menu-link:hover, .menu-link.active { color: var(--gold); }
-
-        .hamburger-wrap {
-            display: none; width: 32px; height: 32px; cursor: pointer; position: relative; z-index: 6000;
-        }
-        .hamburger-wrap div {
-            position: absolute; width: 100%; height: 2px; background: var(--gold);
-            left: 0; transform-origin: center; transition: all 0.5s var(--ease);
-        }
-        .line1 { top: 30%; } .line2 { top: 50%; transform: translateY(-50%); } .line3 { top: 70%; }
-        .hamburger-wrap.is-active .line1 { top: 50%; transform: translateY(-50%) rotate(405deg); }
-        .hamburger-wrap.is-active .line2 { opacity: 0; transform: translateX(-30px); }
-        .hamburger-wrap.is-active .line3 { top: 50%; transform: translateY(-50%) rotate(-405deg); }
-
-        @media (max-width: 900px) { .desktop-nav { display: none; } .hamburger-wrap { display: block; } }
-
-        .mobile-nav-overlay {
-            position: fixed; top: 0; right: 0; width: 100%; height: 100%; z-index: 5500; background: #080808;
-            display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 30px;
-            clip-path: circle(0px at 100% 0%); transition: clip-path 0.7s var(--ease);
-        }
-        .mobile-nav-overlay.reveal { clip-path: circle(150% at 100% 0%); }
-        .mob-item {
-            font-family: var(--font-head); font-size: 2.5rem; color: #fff;
-            opacity: 0; transform: translateY(40px); transition: 0.5s var(--ease);
-            background: none; border: none; cursor: pointer;
-        }
-        .mobile-nav-overlay.reveal .mob-item:nth-child(1) { transition-delay: 0.1s; opacity: 1; transform: translateY(0); }
-        .mobile-nav-overlay.reveal .mob-item:nth-child(2) { transition-delay: 0.2s; opacity: 1; transform: translateY(0); }
-        .mobile-nav-overlay.reveal .mob-item:nth-child(3) { transition-delay: 0.3s; opacity: 1; transform: translateY(0); }
-
-        /* ================= 3. SECCIONES Y GRID ================= */
-        main { padding-top: 140px; width: 90%; max-width: 1300px; margin: 0 auto; padding-bottom: 50px; }
-
-        .section-header { text-align: center; margin-bottom: 70px; opacity: 0; transform: translateY(20px); transition: 1s; }
-        .section-header.in-view { opacity: 1; transform: translateY(0); }
-        .section-header h2 { font-family: var(--font-head); font-size: 3rem; color: #fff; margin-bottom: 10px; }
-        .section-header p {
-            color: var(--gold); text-transform: uppercase; letter-spacing: 4px; font-size: 0.8rem;
-            display: inline-block; padding-bottom: 10px; border-bottom: 2px solid var(--gold);
-        }
-        section { display: none; } section.active-sec { display: block; }
-        
-        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
-        @media (max-width: 1100px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 20px;} }
-        @media (max-width: 650px) { .grid { grid-template-columns: 1fr; gap: 40px; } }
-
-        /* ================= 4. CARTAS ================= */
         .card {
-            background: var(--dark-card); border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 4px; overflow: hidden; opacity: 0; transform: translateY(30px); transition: 0.4s var(--ease);
-            position: relative; perspective: 1000px; 
+            background: white;
+            aspect-ratio: 1/1;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            -webkit-tap-highlight-color: transparent;
         }
-        .card.card-appear { opacity: 1; transform: translateY(0); transition: 0.8s var(--ease); }
-        
-        .flip-box {
-            width: 100%; aspect-ratio: 4/5; position: relative; 
-            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            transform-style: preserve-3d; cursor: pointer;
-        }
-        .card:hover .flip-box { transform: rotateY(180deg); }
+        .card.flipped { background: #ffeaa7; transform: rotateY(180deg); }
+        .card.matched { background: #55efc4; animation: pulse 0.5s; visibility: hidden; opacity: 0;}
 
-        .flip-front, .flip-back {
-            position: absolute; width: 100%; height: 100%;
-            -webkit-backface-visibility: hidden; backface-visibility: hidden;
-            border-radius: 2px;
+        /* --- NIVEL 3: QUIZ --- */
+        .quiz-option {
+            background: white;
+            border: 2px solid #eee;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-weight: bold;
         }
-        .flip-front img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .flip-back {
-            background: #080808; border: 1px solid var(--gold);
-            transform: rotateY(180deg); 
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            background-image: radial-gradient(circle, rgba(212,175,55,0.1), transparent);
-        }
-        .text-back { color: var(--gold); font-family: var(--font-head); letter-spacing: 2px; font-size: 1.2rem; }
-        
-        .card-tag {
-            position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.8); z-index: 5;
-            border: 1px solid var(--gold); color: var(--gold); padding: 5px 10px;
-            font-size: 0.6rem; text-transform: uppercase; font-weight: bold; pointer-events: none;
-        }
+        .quiz-option:active { background: #eee; }
 
-        .info-box { padding: 25px; text-align: center; }
-        .p-name { font-family: var(--font-head); font-size: 1.4rem; margin-bottom: 5px; color: #fff; }
-        .p-price { color: var(--gold); font-size: 1.3rem; font-weight: 700; margin-bottom: 20px; display: block; }
-
-        /* ESTILO BOTON PRINCIPAL (GOLD) */
-        .btn-glow {
-            width: 100%; padding: 16px 0; cursor: pointer;
-            background: linear-gradient(90deg, #aa771c, #ffd700, #aa771c); background-size: 200%; 
-            color: #000; font-weight: 800; border: none; text-transform: uppercase; 
-            letter-spacing: 2px; font-size: 0.75rem; border-radius: 2px; transition: 0.3s;
-            animation: shimmer 3s infinite linear; 
-        }
-        .btn-glow:hover { box-shadow: 0 0 25px rgba(212,175,55,0.7); transform: scale(1.02); }
-        @keyframes shimmer { 0% {background-position: 0% center;} 100% {background-position: 200% center;} }
-
-        /* ESTILO BOTON SECUNDARIO (GHOST/INSTAGRAM) */
-        .btn-ghost {
-            background: transparent; border: 1px solid #444; width: 100%; padding: 14px;
-            color: #ccc; margin-top: 10px; text-transform: uppercase; font-size: 0.7rem; 
-            cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px;
-            border-radius: 2px;
-        }
-        .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
-        .btn-ghost svg { width: 18px; height: 18px; fill: currentColor; }
-        
-        /* ================= 5. INFO SECTION Y POLITICAS ================= */
-        .info-card {
-            border: 1px solid var(--gold); padding: 50px 20px; max-width: 600px; margin: 0 auto 50px auto;
-            text-align: center; background: radial-gradient(circle at center, #1a1a1a, #000);
-            box-shadow: 0 0 50px rgba(212, 175, 55, 0.05);
+        /* --- CARTA FINAL --- */
+        .letter-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+            font-family: 'Pacifico', cursive; /* Fuente tipo manuscrita */
+            font-size: 1.2rem;
+            color: #444;
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ffccd5;
+            box-shadow: inset 0 0 20px #fff0f0;
+            line-height: 1.6;
         }
 
-        .policies-container {
-            max-width: 1000px; margin: 0 auto;
-            border-top: 1px solid #333; padding-top: 40px;
-            display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
-            font-size: 0.75rem; color: #888; text-align: left;
+        /* Animación Shake (Error) */
+        .shake { animation: shake 0.5s; }
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
         }
-        .policy-col h4 {
-            color: var(--gold); font-family: var(--font-head); margin-bottom: 10px; font-size: 0.9rem;
-        }
-        .policy-col p { margin-bottom: 10px; line-height: 1.5; text-align: justify; }
 
-        @media (max-width: 768px) { .policies-container { grid-template-columns: 1fr; gap: 30px; } }
-
-        /* ================= 6. FLOATING WHATSAPP ================= */
-        .wa-float {
-            position: fixed; bottom: 30px; right: 30px; width: 64px; height: 64px;
-            background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 0 20px rgba(37, 211, 102, 0.4); border: 2px solid rgba(255,255,255,0.2);
-            z-index: 9000; transition: 0.3s;
+        /* Confeti */
+        canvas#confetti {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 999;
         }
-        .wa-float:hover { transform: scale(1.1); }
-        .wa-float svg { width: 34px; height: 34px; fill: #fff; }
+
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+        @keyframes float { 0% { transform: translateY(0); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0); } }
 
     </style>
 </head>
 <body>
 
-    <div class="background-world">
-        <div class="gold-dust"></div>
+    <!-- Canvas para el premio final -->
+    <canvas id="confetti"></canvas>
+
+    <!-- Barra de Progreso Superior -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
     </div>
 
-    <!-- INTRO -->
-    <div id="intro-screen">
-        <div class="intro-logo-wrapper" id="introLogo">
-            <img src="https://scontent-bog2-1.xx.fbcdn.net/v/t39.30808-6/588554107_122269714652244757_6039592121799148836_n.jpg?stp=dst-webp_e15_q70_s720x720_u&efg=eyJ1cmxnZW4iOiJ1cmxnZW5fZnJvbV91cmwifQ&_nc_cid=0&_nc_ad=z-m&_nc_rml=0&_nc_ht=scontent-bog2-1.xx&_nc_cat=102&_nc_ohc=LCLvXZKuZmgQ7kNvwE1xpE9&_nc_gid=dviYBQDvsUjldjw1QGOXrg&ccb=1-7&_nc_sid=833d8c&oh=00_Afgg1PjAY6JF4W5Vs5QB3myOubGYaBMb6qJyI4t8X3kYYg&oe=692D96C4" alt="Enigma Logo">
-        </div>
-        <div class="intro-text-wrapper" id="introText">
-            <h1>ENIGMA</h1>
-            <div class="mv-box">
-                <div class="mv-item">
-                    <strong>Misión</strong>
-                    <span>Enigma busca crear experiencias únicas y memorables mediante cajas misteriosas temáticas que combinan maquillaje, belleza y coleccionables exclusivos. Nuestra misión es sorprender y emocionar a los clientes con productos curados con intención, estética y creatividad, brindando calidad, variedad y una experiencia innovadora que conecte emocionalmente y refleje nuestra pasión por el diseño y la magia de descubrir.</span>
-                </div>
-                <div class="mv-item">
-                    <strong>Visión</strong>
-                    <span>Ser una marca líder en Colombia en cajas misteriosas temáticas, reconocida por su creatividad, calidad y capacidad de generar experiencias emocionales únicas. A futuro, aspiramos a expandirnos mediante ediciones especiales, alianzas, una comunidad fiel y una presencia digital sólida, evolucionando hacia suscripciones mensuales, líneas propias y llegada a mercados internacionales con una propuesta original y sostenible.</span>
-                </div>
-            </div>
-        </div>
+    <!-- PANTALLA 1: BIENVENIDA -->
+    <div id="screen-welcome" class="game-container screen active">
+        <h1>¡Hola Pochi! 🐻</h1>
+        <p>Hoy es nuestro aniversario, pero el regalo te lo tienes que ganar.</p>
+        <p>He preparado una <strong>Misión de Amor</strong>. Tienes que completar 3 niveles para desbloquear mi carta secreta.</p>
+        <p>¿Lista para jugar?</p>
+        <button class="btn" onclick="goToLevel(1)">¡Estoy Lista!</button>
     </div>
 
-    <header id="mainNav">
-        <div class="brand-logo">ENIGMA<span>.</span></div>
-        <nav class="desktop-nav">
-            <button class="menu-link active" onclick="switchSection('col-section', this)">Colección</button>
-            <button class="menu-link" onclick="switchSection('makeup-section', this)">Maquillaje</button>
-            <button class="menu-link" onclick="switchSection('info-section', this)">Info</button>
-        </nav>
-        <div class="hamburger-wrap" onclick="toggleMenu()">
-            <div class="line1"></div> <div class="line2"></div> <div class="line3"></div>
-        </div>
-    </header>
-
-    <div class="mobile-nav-overlay" id="mobileOverlay">
-        <button class="mob-item" onclick="switchSection('col-section', null); toggleMenu()">Colección</button>
-        <button class="mob-item" onclick="switchSection('makeup-section', null); toggleMenu()">Maquillaje</button>
-        <button class="mob-item" onclick="switchSection('info-section', null); toggleMenu()">Info & Soporte</button>
+    <!-- NIVEL 1: CLICKER -->
+    <div id="screen-level1" class="game-container screen">
+        <h2>Nivel 1: Atrapa mi Amor 💋</h2>
+        <p>Toca <strong>10 corazones</strong> rápido antes de que desaparezcan.</p>
+        <h3 id="score1" style="color:var(--primary); font-size: 2rem;">0 / 10</h3>
+        
+        <div id="game-area-1"></div>
     </div>
 
-    <main>
+    <!-- NIVEL 2: MEMORIA -->
+    <div id="screen-level2" class="game-container screen">
+        <h2>Nivel 2: Conexión Mental 🧠</h2>
+        <p>Encuentra las parejas de emojis.</p>
+        <div class="memory-grid" id="memory-board"></div>
+    </div>
 
-        <section id="col-section" class="active-sec">
-            <div class="section-header">
-                <h2>Colección Enigma</h2>
-                <p>Gira la imagen y descubre el misterio</p>
-            </div>
-            
-            <div class="grid">
-                <!-- ITEM 1 -->
-                <div class="card">
-                    <span class="card-tag">Exclusivo</span>
-                    <div class="flip-box">
-                        <div class="flip-front">
-                            <img src="https://scontent-bog2-1.xx.fbcdn.net/v/t39.30808-6/588554107_122269714652244757_6039592121799148836_n.jpg?stp=dst-webp_e15_q70_s720x720_u&efg=eyJ1cmxnZW4iOiJ1cmxnZW5fZnJvbV91cmwifQ&_nc_cid=0&_nc_ad=z-m&_nc_rml=0&_nc_ht=scontent-bog2-1.xx&_nc_cat=102&_nc_ohc=LCLvXZKuZmgQ7kNvwE1xpE9&_nc_gid=dviYBQDvsUjldjw1QGOXrg&ccb=1-7&_nc_sid=833d8c&oh=00_Afgg1PjAY6JF4W5Vs5QB3myOubGYaBMb6qJyI4t8X3kYYg&oe=692D96C4" alt="Img">
-                        </div>
-                        <div class="flip-back">
-                            <div class="text-back">ENIGMA</div>
-                        </div>
-                    </div>
-                    <div class="info-box">
-                        <div class="p-name">Oso Imperial Dorado</div>
-                        <span class="p-price">$45.000</span>
-                        <button class="btn-glow" onclick="whatsapp('Quiero comprar: Oso Imperial')">Ordenar Caja</button>
-                    </div>
-                </div>
+    <!-- NIVEL 3: QUIZ -->
+    <div id="screen-level3" class="game-container screen">
+        <h2>Nivel 3: Nuestra Historia 📖</h2>
+        <p id="question-text" style="font-weight: bold; font-size: 1.3rem;">Pregunta...</p>
+        <div id="quiz-options"></div>
+    </div>
 
-                <!-- ITEM 2 -->
-                <div class="card">
-                    <span class="card-tag">Nuevo</span>
-                    <div class="flip-box">
-                        <div class="flip-front">
-                            <img src="https://scontent-bog2-1.xx.fbcdn.net/v/t39.30808-6/588554107_122269714652244757_6039592121799148836_n.jpg?stp=dst-webp_e15_q70_s720x720_u&efg=eyJ1cmxnZW4iOiJ1cmxnZW5fZnJvbV91cmwifQ&_nc_cid=0&_nc_ad=z-m&_nc_rml=0&_nc_ht=scontent-bog2-1.xx&_nc_cat=102&_nc_ohc=LCLvXZKuZmgQ7kNvwE1xpE9&_nc_gid=dviYBQDvsUjldjw1QGOXrg&ccb=1-7&_nc_sid=833d8c&oh=00_Afgg1PjAY6JF4W5Vs5QB3myOubGYaBMb6qJyI4t8X3kYYg&oe=692D96C4" alt="Img">
-                        </div>
-                        <div class="flip-back">
-                            <div class="text-back">ENIGMA</div>
-                        </div>
-                    </div>
-                    <div class="info-box">
-                        <div class="p-name">Conejo de Luna</div>
-                        <span class="p-price">$45.000</span>
-                        <button class="btn-glow" onclick="whatsapp('Quiero comprar: Conejo de Luna')">Ordenar Caja</button>
-                    </div>
-                </div>
-
-                <!-- ITEM 3 -->
-                <div class="card">
-                    <span class="card-tag">Popular</span>
-                    <div class="flip-box">
-                        <div class="flip-front">
-                            <img src="https://scontent-bog2-1.xx.fbcdn.net/v/t39.30808-6/588554107_122269714652244757_6039592121799148836_n.jpg?stp=dst-webp_e15_q70_s720x720_u&efg=eyJ1cmxnZW4iOiJ1cmxnZW5fZnJvbV91cmwifQ&_nc_cid=0&_nc_ad=z-m&_nc_rml=0&_nc_ht=scontent-bog2-1.xx&_nc_cat=102&_nc_ohc=LCLvXZKuZmgQ7kNvwE1xpE9&_nc_gid=dviYBQDvsUjldjw1QGOXrg&ccb=1-7&_nc_sid=833d8c&oh=00_Afgg1PjAY6JF4W5Vs5QB3myOubGYaBMb6qJyI4t8X3kYYg&oe=692D96C4" alt="Img">
-                        </div>
-                        <div class="flip-back">
-                            <div class="text-back">ENIGMA</div>
-                        </div>
-                    </div>
-                    <div class="info-box">
-                        <div class="p-name">Zorro del Bosque</div>
-                        <span class="p-price">$45.000</span>
-                        <button class="btn-glow" onclick="whatsapp('Quiero comprar: Zorro del Bosque')">Ordenar Caja</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="makeup-section">
-            <div class="section-header">
-                <h2>Maquillaje de Lujo</h2>
-                <p>Tu belleza en una caja</p>
-            </div>
-            <div class="grid">
-                <!-- MAKEUP 1 -->
-                <div class="card">
-                    <div class="flip-box">
-                        <div class="flip-front"><img src="https://scontent-bog2-1.xx.fbcdn.net/v/t39.30808-6/588554107_122269714652244757_6039592121799148836_n.jpg?stp=dst-webp_e15_q70_s720x720_u&efg=eyJ1cmxnZW4iOiJ1cmxnZW5fZnJvbV91cmwifQ&_nc_cid=0&_nc_ad=z-m&_nc_rml=0&_nc_ht=scontent-bog2-1.xx&_nc_cat=102&_nc_ohc=LCLvXZKuZmgQ7kNvwE1xpE9&_nc_gid=dviYBQDvsUjldjw1QGOXrg&ccb=1-7&_nc_sid=833d8c&oh=00_Afgg1PjAY6JF4W5Vs5QB3myOubGYaBMb6qJyI4t8X3kYYg&oe=692D96C4" alt="Mk1"></div>
-                        <div class="flip-back"><div class="text-back">ENIGMA</div></div>
-                    </div>
-                    <div class="info-box">
-                        <div class="p-name">Brillo Eterno</div>
-                        <span class="p-price">$80.000</span>
-                        <!-- SOLO 1 BOTON "Pedir Ahora" -->
-                        <button class="btn-glow" onclick="whatsapp('Quiero la caja Brillo Eterno')">Pedir Ahora</button>
-                    </div>
-                </div>
-
-                <!-- MAKEUP 2 -->
-                <div class="card">
-                    <div class="flip-box">
-                        <div class="flip-front"><img src="https://scontent-bog2-1.xx.fbcdn.net/v/t39.30808-6/588554107_122269714652244757_6039592121799148836_n.jpg?stp=dst-webp_e15_q70_s720x720_u&efg=eyJ1cmxnZW4iOiJ1cmxnZW5fZnJvbV91cmwifQ&_nc_cid=0&_nc_ad=z-m&_nc_rml=0&_nc_ht=scontent-bog2-1.xx&_nc_cat=102&_nc_ohc=LCLvXZKuZmgQ7kNvwE1xpE9&_nc_gid=dviYBQDvsUjldjw1QGOXrg&ccb=1-7&_nc_sid=833d8c&oh=00_Afgg1PjAY6JF4W5Vs5QB3myOubGYaBMb6qJyI4t8X3kYYg&oe=692D96C4" alt="Mk2"></div>
-                        <div class="flip-back"><div class="text-back">ENIGMA</div></div>
-                    </div>
-                    <div class="info-box">
-                        <div class="p-name">Esencia Natural</div>
-                        <span class="p-price">$65.000</span>
-                        <button class="btn-glow" onclick="whatsapp('Quiero la caja Esencia Natural')">Pedir Ahora</button>
-                    </div>
-                </div>
-
-                <!-- MAKEUP 3 -->
-                 <div class="card">
-                    <div class="flip-box">
-                        <div class="flip-front"><img src="https://scontent-bog2-1.xx.fbcdn.net/v/t39.30808-6/588554107_122269714652244757_6039592121799148836_n.jpg?stp=dst-webp_e15_q70_s720x720_u&efg=eyJ1cmxnZW4iOiJ1cmxnZW5fZnJvbV91cmwifQ&_nc_cid=0&_nc_ad=z-m&_nc_rml=0&_nc_ht=scontent-bog2-1.xx&_nc_cat=102&_nc_ohc=LCLvXZKuZmgQ7kNvwE1xpE9&_nc_gid=dviYBQDvsUjldjw1QGOXrg&ccb=1-7&_nc_sid=833d8c&oh=00_Afgg1PjAY6JF4W5Vs5QB3myOubGYaBMb6qJyI4t8X3kYYg&oe=692D96C4" alt="Mk3"></div>
-                        <div class="flip-back"><div class="text-back">ENIGMA</div></div>
-                    </div>
-                    <div class="info-box">
-                        <div class="p-name">Neón Vibrante</div>
-                        <span class="p-price">$90.000</span>
-                        <button class="btn-glow" onclick="whatsapp('Quiero la caja Neón Vibrante')">Pedir Ahora</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="info-section">
-            <div class="section-header">
-                <h2>Servicio Premium</h2>
-                <p>Soporte y Contacto</p>
-            </div>
-            
-            <div class="info-card">
-                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="1"><path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14v2H5z"></path></svg>
-                <h3 style="margin:20px 0; font-family:var(--font-head); font-size:1.8rem;">Garantía ENIGMA</h3>
-                <p style="color:#bbb; margin-bottom:30px; line-height:1.7;">
-                    Estamos para asesorarte en tu compra y resolver cualquier duda. Calidad garantizada.
-                </p>
-                
-                <!-- BOTON WHATSAPP -->
-                <button class="btn-glow" style="max-width:350px; margin:0 auto;" onclick="whatsapp('Hola, necesito asistencia con un pedido')">Hablar por WhatsApp</button>
-                
-                <!-- BOTON INSTAGRAM AGREGADO -->
-                <button class="btn-ghost" style="max-width:350px; margin:15px auto 0 auto;" onclick="window.open('https://instagram.com/','_blank')">
-                    <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                    Síguenos en Instagram
-                </button>
-            </div>
-
-            <!-- POLITICAS DENTRO DE INFO -->
-            <div class="policies-container">
-                <div class="policy-col">
-                    <h4>TÉRMINOS Y CONDICIONES</h4>
-                    <p>Bienvenido a ENIGMA. Al adquirir nuestras "Cajas Misteriosas" y productos de maquillaje, aceptas los siguientes términos: 1. Los productos dentro de las cajas sorpresa son aleatorios y se basan en la temática seleccionada (Oso, Conejo, Zorro, etc.). No se aceptan cambios por gusto personal, únicamente por defectos de fábrica comprobados en las primeras 24 horas de recepción. 2. Los tiempos de envío pueden variar entre 2 a 5 días hábiles según la ubicación en Colombia.</p>
-                    <p>Propiedad Intelectual: Todo el contenido visual, logotipos y diseños de ENIGMA están protegidos. El uso no autorizado será sancionado.</p>
-                </div>
-                <div class="policy-col">
-                    <h4>POLÍTICA DE PRIVACIDAD (Habeas Data)</h4>
-                    <p>En cumplimiento de la Ley 1581 de 2012 y el Decreto 1377 de 2013, ENIGMA informa que los datos personales recolectados (nombre, teléfono, dirección) serán utilizados exclusivamente para: A) Procesamiento y entrega de pedidos. B) Comunicación sobre el estado de la compra. C) Envío de novedades y promociones exclusivas si el cliente lo autoriza.</p>
-                    <p>Tus datos están protegidos bajo estándares de seguridad y no serán compartidos con terceros ajenos a la logística de envío. Tienes derecho a conocer, actualizar y rectificar tus datos enviando una solicitud a nuestro canal de WhatsApp.</p>
-                </div>
-            </div>
-
-        </section>
-
-    </main>
-
-    <a href="#" onclick="whatsapp('Hola Enigma')" class="wa-float" title="Contactar">
-        <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-    </a>
+    <!-- PANTALLA FINAL: CARTA -->
+    <div id="screen-final" class="game-container screen" style="max-width: 600px;">
+        <h1>¡Felicidades, Amor! 🎉</h1>
+        <p>Pasaste todos los niveles. Aquí tienes tu recompensa:</p>
+        
+        <div class="letter-content" id="typewriter"></div>
+        
+        <button class="btn" style="margin-top: 20px;" onclick="restart()">Jugar de nuevo</button>
+    </div>
 
     <script>
-        // INTRO
-        window.onload = function() {
-            setTimeout(() => { document.getElementById('introLogo').classList.add('start-anim-logo'); }, 300);
-            setTimeout(() => { document.getElementById('introText').classList.add('start-anim-text'); }, 1200);
-            setTimeout(() => {
-                const intro = document.getElementById('intro-screen');
-                intro.style.opacity = '0';
-                setTimeout(() => {
-                    intro.style.display = 'none';
-                    initObservers();
-                }, 1000);
-            }, 7000); 
-        };
-
-        // NAV Y MENU
-        function toggleMenu() {
-            document.getElementById('mobileOverlay').classList.toggle('reveal');
-            document.querySelector('.hamburger-wrap').classList.toggle('is-active');
-        }
-
-        let lastScroll = 0;
-        window.addEventListener('scroll', () => {
-            const current = window.pageYOffset;
-            const nav = document.getElementById('mainNav');
-            if(current > 50 && current > lastScroll) nav.classList.add('nav-hide');
-            else nav.classList.remove('nav-hide');
-            lastScroll = current;
-        });
-
-        // TABS
-        function switchSection(id, btn) {
-            document.querySelectorAll('section').forEach(s => s.classList.remove('active-sec'));
-            document.getElementById(id).classList.add('active-sec');
-            if(btn) {
-                document.querySelectorAll('.menu-link').forEach(l => l.classList.remove('active'));
-                btn.classList.add('active');
+        /* =========================================
+           CONFIGURACIÓN PERSONALIZADA (TU INFORMACIÓN)
+           ========================================= */
+        
+        // --- PREGUNTAS DEL QUIZ ---
+        const questions = [
+            {
+                q: "¿En qué lugar nos conocimos por primera vez?", 
+                options: ["En el parque", "En una fiesta", "En el Centro Comercial", "En la universidad"],
+                correct: 2 // El 2 corresponde a "En el Centro Comercial" (0, 1, 2...)
+            },
+            {
+                q: "¿Qué es lo que más me gusta de ti?",
+                options: ["Tu sonrisa", "Tus ojos", "Todo tu ser", "Tus abrazos"],
+                correct: 2 // "Todo tu ser"
+            },
+            {
+                q: "¿Cuál es mi comida favorita?",
+                options: ["Pizza", "Sushi", "Hamburguesa", "Tacos"],
+                correct: 0 // Cambia este número según la opción correcta (0=Pizza, 1=Sushi...)
             }
-            window.scrollTo({top:0, behavior:'smooth'});
-            setTimeout(initObservers, 100); 
+        ];
+
+        // --- MENSAJE FINAL ---
+        const finalMessage = `¡Feliz Aniversario, mi amor preciosa! 💖
+
+¿Quién diría que ese día en el Centro Comercial mi vida cambiaría para siempre? Desde que te vi, supe que había algo especial en ti.
+
+Gracias por ser mi compañera de juegos, mi mejor amiga y el amor de mi vida. No necesito nada más si te tengo a mi lado.
+
+Prometo seguir cuidándote, haciéndote reír y amándote en cada nivel que pasemos juntos.
+
+Te amo con todo mi corazón, Pochi.
+Eres la más hermosa del universo. 🚀❤️`;
+
+        /* =========================================
+           MOTOR DEL JUEGO (NO TOCAR)
+           ========================================= */
+
+        let score1 = 0;
+        
+        function updateProgress(percent) {
+            document.getElementById('progressBar').style.width = percent + '%';
         }
 
-        // SCROLL REVEAL
-        function initObservers() {
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if(entry.isIntersecting) {
-                        entry.target.classList.add('card-appear'); 
-                        if(entry.target.classList.contains('section-header')) entry.target.classList.add('in-view');
+        function goToLevel(level) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            
+            if (level === 1) {
+                document.getElementById('screen-level1').classList.add('active');
+                updateProgress(10);
+                startGame1();
+            } else if (level === 2) {
+                document.getElementById('screen-level2').classList.add('active');
+                updateProgress(40);
+                startGame2();
+            } else if (level === 3) {
+                document.getElementById('screen-level3').classList.add('active');
+                updateProgress(70);
+                startGame3();
+            } else if (level === 4) {
+                document.getElementById('screen-final').classList.add('active');
+                updateProgress(100);
+                startFinal();
+            }
+        }
+
+        // --- LÓGICA NIVEL 1 ---
+        function startGame1() {
+            score1 = 0;
+            document.getElementById('score1').innerText = "0 / 10";
+            document.getElementById('game-area-1').innerHTML = ''; // Limpiar
+            
+            const interval = setInterval(() => {
+                if (score1 >= 10) {
+                    clearInterval(interval);
+                    setTimeout(() => goToLevel(2), 500);
+                    return;
+                }
+                spawnHeart();
+            }, 700);
+        }
+
+        function spawnHeart() {
+            const area = document.getElementById('game-area-1');
+            if(!area.offsetParent) return; // Si no está visible, parar
+
+            const heart = document.createElement('div');
+            heart.classList.add('falling-heart');
+            heart.innerHTML = '❤️'; 
+            
+            const x = Math.random() * (area.clientWidth - 50);
+            const y = Math.random() * (area.clientHeight - 50);
+            
+            heart.style.left = x + 'px';
+            heart.style.top = y + 'px';
+            
+            // Evento Touch para celular
+            const handleTap = (e) => {
+                e.preventDefault();
+                score1++;
+                document.getElementById('score1').innerText = score1 + " / 10";
+                heart.style.transform = "scale(1.5)";
+                heart.style.opacity = "0";
+                setTimeout(() => heart.remove(), 200);
+            };
+
+            heart.addEventListener('touchstart', handleTap);
+            heart.addEventListener('click', handleTap);
+
+            area.appendChild(heart);
+            
+            setTimeout(() => { if(heart.parentNode) heart.remove(); }, 1500);
+        }
+
+        // --- LÓGICA NIVEL 2 ---
+        const emojis = ['🐻', '🛍️', '🍕', '🐱', '🌞', '🍦', '💍', '🐧']; // Añadí bolsa de compras
+        let cards = [...emojis, ...emojis];
+        let flippedCards = [];
+        let matchedPairs = 0;
+
+        function startGame2() {
+            const board = document.getElementById('memory-board');
+            board.innerHTML = '';
+            matchedPairs = 0;
+            flippedCards = [];
+            cards.sort(() => 0.5 - Math.random());
+            
+            cards.forEach((emoji, index) => {
+                const card = document.createElement('div');
+                card.classList.add('card');
+                card.dataset.emoji = emoji;
+                card.dataset.index = index;
+                card.innerHTML = '<i class="fas fa-question" style="font-size: 1rem; color: #ddd;"></i>';
+                
+                card.onclick = () => flipCard(card);
+                board.appendChild(card);
+            });
+        }
+
+        function flipCard(card) {
+            if (flippedCards.length < 2 && !card.classList.contains('flipped')) {
+                card.classList.add('flipped');
+                card.innerText = card.dataset.emoji;
+                flippedCards.push(card);
+
+                if (flippedCards.length === 2) {
+                    checkMatch();
+                }
+            }
+        }
+
+        function checkMatch() {
+            const [c1, c2] = flippedCards;
+            if (c1.dataset.emoji === c2.dataset.emoji) {
+                matchedPairs++;
+                setTimeout(() => {
+                    c1.classList.add('matched');
+                    c2.classList.add('matched');
+                    if (matchedPairs === emojis.length) {
+                        setTimeout(() => goToLevel(3), 800);
                     }
-                });
-            }, {threshold: 0.1});
-            document.querySelectorAll('.card').forEach(c => observer.observe(c));
-            document.querySelectorAll('.section-header').forEach(h => observer.observe(h));
+                }, 500);
+            } else {
+                setTimeout(() => {
+                    c1.classList.remove('flipped');
+                    c1.innerHTML = '<i class="fas fa-question" style="font-size: 1rem; color: #ddd;"></i>';
+                    c2.classList.remove('flipped');
+                    c2.innerHTML = '<i class="fas fa-question" style="font-size: 1rem; color: #ddd;"></i>';
+                }, 800);
+            }
+            flippedCards = [];
         }
 
-        // ACTIONS
-        function whatsapp(msg) {
-            window.open(`https://wa.me/573008556516?text=${encodeURIComponent(msg)}`, '_blank');
+        // --- LÓGICA NIVEL 3 ---
+        let qIndex = 0;
+        function startGame3() {
+            qIndex = 0;
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            if (qIndex >= questions.length) {
+                goToLevel(4);
+                return;
+            }
+            const q = questions[qIndex];
+            document.getElementById('question-text').innerText = q.q;
+            const container = document.getElementById('quiz-options');
+            container.innerHTML = '';
+
+            q.options.forEach((opt, idx) => {
+                const div = document.createElement('div');
+                div.classList.add('quiz-option');
+                div.innerText = opt;
+                div.onclick = () => {
+                    if (idx === q.correct) {
+                        div.style.background = '#55efc4';
+                        div.style.borderColor = '#00b894';
+                        setTimeout(() => {
+                            qIndex++;
+                            loadQuestion();
+                        }, 500);
+                    } else {
+                        div.style.background = '#ff7675';
+                        div.classList.add('shake');
+                        setTimeout(() => {
+                            div.style.background = 'white';
+                            div.classList.remove('shake');
+                        }, 500);
+                    }
+                };
+                container.appendChild(div);
+            });
+        }
+
+        // --- FINAL ---
+        function startFinal() {
+            confettiEffect();
+            typeWriterEffect();
+        }
+
+        function typeWriterEffect() {
+            const container = document.getElementById('typewriter');
+            container.innerHTML = '';
+            let i = 0;
+            function type() {
+                if (i < finalMessage.length) {
+                    container.innerHTML += finalMessage.charAt(i) === '\n' ? '<br>' : finalMessage.charAt(i);
+                    i++;
+                    setTimeout(type, 50);
+                }
+            }
+            type();
+        }
+
+        function restart() {
+            location.reload();
+        }
+
+        function confettiEffect() {
+            const canvas = document.getElementById('confetti');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const pieces = [];
+            for(let i=0; i<300; i++) {
+                pieces.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height - canvas.height,
+                    color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+                    size: Math.random() * 10 + 5,
+                    speed: Math.random() * 5 + 2
+                });
+            }
+
+            function draw() {
+                ctx.clearRect(0,0,canvas.width,canvas.height);
+                pieces.forEach(p => {
+                    ctx.fillStyle = p.color;
+                    ctx.fillRect(p.x, p.y, p.size, p.size);
+                    p.y += p.speed;
+                    if(p.y > canvas.height) p.y = -20;
+                });
+                requestAnimationFrame(draw);
+            }
+            draw();
         }
     </script>
 </body>
-                                </html>
+</html>
